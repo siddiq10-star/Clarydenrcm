@@ -1,0 +1,1062 @@
+@import "tailwindcss";
+
+/* =========================================================
+   KINZ HEALTHOPS — GLOBAL DESIGN SYSTEM
+   Healthcare × FinTech × Enterprise SaaS
+   ========================================================= */
+
+@theme inline {
+  /* Brand */
+  --color-kinz-950: #041019;
+  --color-kinz-900: #071722;
+  --color-kinz-850: #0a1c28;
+  --color-kinz-800: #0d2431;
+  --color-kinz-700: #173746;
+
+  /* Neutral */
+  --color-cloud-50: #f7fafc;
+  --color-cloud-100: #eef4f7;
+  --color-cloud-200: #dce7ec;
+  --color-cloud-300: #c6d6de;
+
+  /* Accent */
+  --color-cyan-400: #36ddcf;
+  --color-cyan-500: #15c8bb;
+  --color-blue-400: #67a6ff;
+  --color-blue-500: #4c8dff;
+  --color-blue-600: #3372e8;
+
+  /* Status */
+  --color-success-500: #20c997;
+  --color-warning-500: #f5b942;
+  --color-danger-500: #ff6b76;
+
+  /* Typography */
+  --font-sans:
+    var(--font-kinz-sans),
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  --font-display:
+  var(--font-kinz-sans),
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+
+  /* Radius */
+  --radius-kinz-sm: 12px;
+  --radius-kinz-md: 18px;
+  --radius-kinz-lg: 24px;
+  --radius-kinz-xl: 32px;
+
+  /* Shadows */
+  --shadow-kinz-sm:
+    0 1px 2px rgba(3, 15, 24, 0.04),
+    0 8px 24px rgba(3, 15, 24, 0.06);
+
+  --shadow-kinz-md:
+    0 1px 2px rgba(3, 15, 24, 0.05),
+    0 18px 60px rgba(3, 15, 24, 0.1);
+
+  --shadow-kinz-glow:
+    0 0 0 1px rgba(54, 221, 207, 0.08),
+    0 20px 80px rgba(54, 221, 207, 0.09);
+}
+
+/* =========================================================
+   ROOT TOKENS
+   ========================================================= */
+
+:root {
+  color-scheme: light;
+
+  --page-bg: #f6f9fb;
+  --page-bg-deep: #eef4f7;
+
+  --surface: rgba(255, 255, 255, 0.84);
+  --surface-solid: #ffffff;
+  --surface-muted: #f0f5f7;
+
+  --ink: #071722;
+  --ink-soft: #3b5260;
+  --ink-muted: #6d818c;
+
+  --border: rgba(7, 23, 34, 0.09);
+  --border-strong: rgba(7, 23, 34, 0.15);
+
+  --accent: #15c8bb;
+  --accent-bright: #36ddcf;
+  --accent-blue: #4c8dff;
+
+  --container: 1240px;
+  --container-wide: 1440px;
+
+  --nav-height: 78px;
+}
+
+/* =========================================================
+   RESET / BASE
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-height) + 24px);
+  background: var(--page-bg);
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  position: relative;
+  min-height: 100dvh;
+  margin: 0;
+  overflow-x: clip;
+
+  background:
+    radial-gradient(
+      circle at 12% 4%,
+      rgba(76, 141, 255, 0.07),
+      transparent 28rem
+    ),
+    radial-gradient(
+      circle at 88% 2%,
+      rgba(54, 221, 207, 0.08),
+      transparent 30rem
+    ),
+    linear-gradient(180deg, #f8fbfc 0%, #f4f8fa 42%, #ffffff 100%);
+
+  color: var(--ink);
+
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 48% -12%,
+      rgba(54, 221, 207, 0.05),
+      transparent 36rem
+    );
+
+  content: "";
+}
+
+body::after {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+
+  pointer-events: none;
+
+  opacity: 0.22;
+
+  background-image:
+    linear-gradient(
+      rgba(7, 23, 34, 0.018) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(7, 23, 34, 0.018) 1px,
+      transparent 1px
+    );
+
+  background-size: 48px 48px;
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black,
+    transparent 72%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    black,
+    transparent 72%
+  );
+
+  content: "";
+}
+
+main {
+  position: relative;
+  isolation: isolate;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+button:disabled,
+button[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+::selection {
+  background: rgba(21, 200, 187, 0.22);
+  color: #041019;
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 9999;
+
+  transform: translateY(-180%);
+
+  border-radius: 999px;
+  background: #071722;
+  color: white;
+
+  padding: 10px 16px;
+
+  transition: transform 180ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+* {
+  scrollbar-color: rgba(7, 23, 34, 0.24) transparent;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+
+  background:
+    rgba(7, 23, 34, 0.22);
+
+  background-clip: padding-box;
+}
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+
+.kinz-container {
+  width: min(
+    calc(100% - 40px),
+    var(--container)
+  );
+
+  margin-inline: auto;
+}
+
+.kinz-container-wide {
+  width: min(
+    calc(100% - 40px),
+    var(--container-wide)
+  );
+
+  margin-inline: auto;
+}
+
+.kinz-section {
+  position: relative;
+  padding-block: clamp(88px, 9vw, 148px);
+}
+
+.kinz-section-tight {
+  position: relative;
+  padding-block: clamp(64px, 7vw, 104px);
+}
+
+.kinz-section-dark {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(54, 221, 207, 0.12),
+      transparent 34rem
+    ),
+    radial-gradient(
+      circle at 90% 0%,
+      rgba(76, 141, 255, 0.13),
+      transparent 36rem
+    ),
+    #06141f;
+
+  color: white;
+}
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+.kinz-display {
+  font-family: var(--font-display);
+  font-weight: 650;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+}
+
+.kinz-heading {
+  font-family: var(--font-display);
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+}
+
+.kinz-copy {
+  max-width: 680px;
+
+  color: var(--ink-soft);
+
+  font-size: clamp(1rem, 1.35vw, 1.125rem);
+  line-height: 1.8;
+}
+
+.kinz-copy-dark {
+  color: rgba(235, 247, 250, 0.68);
+}
+
+.kinz-gradient-text {
+  background:
+    linear-gradient(
+      110deg,
+      #071722 0%,
+      #154f61 42%,
+      #128f98 72%,
+      #2b72d8 100%
+    );
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+}
+
+.kinz-gradient-text-light {
+  background:
+    linear-gradient(
+      110deg,
+      #ffffff 0%,
+      #d9fbf7 40%,
+      #7debe1 70%,
+      #84b5ff 100%
+    );
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+}
+
+/* =========================================================
+   EYEBROWS / LABELS
+   ========================================================= */
+
+.kinz-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  min-height: 34px;
+
+  border: 1px solid rgba(7, 23, 34, 0.09);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.7);
+
+  padding: 7px 12px;
+
+  color: #23414f;
+
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  line-height: 1;
+  text-transform: uppercase;
+
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.8);
+
+  -webkit-backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+.kinz-eyebrow::before {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+
+  border-radius: 50%;
+
+  background: var(--accent);
+
+  box-shadow:
+    0 0 0 5px rgba(21, 200, 187, 0.09),
+    0 0 18px rgba(21, 200, 187, 0.42);
+
+  content: "";
+}
+
+.kinz-eyebrow-dark {
+  border-color: rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.045);
+  color: rgba(235, 247, 250, 0.76);
+}
+
+/* =========================================================
+   PREMIUM GLASS SURFACES
+   ========================================================= */
+
+.kinz-glass {
+  border: 1px solid rgba(7, 23, 34, 0.085);
+  border-radius: var(--radius-kinz-lg);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.92),
+      rgba(255, 255, 255, 0.68)
+    );
+
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 20px 60px rgba(7, 23, 34, 0.07);
+
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  backdrop-filter: blur(24px) saturate(140%);
+}
+
+.kinz-glass-dark {
+  border: 1px solid rgba(255, 255, 255, 0.085);
+  border-radius: var(--radius-kinz-lg);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.07),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.06),
+    0 32px 90px rgba(0, 0, 0, 0.22);
+
+  -webkit-backdrop-filter: blur(28px) saturate(130%);
+  backdrop-filter: blur(28px) saturate(130%);
+}
+
+/* =========================================================
+   CARD EDGE LIGHTING
+   ========================================================= */
+
+.kinz-edge {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.kinz-edge::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      125deg,
+      rgba(255, 255, 255, 0.7),
+      transparent 28%,
+      transparent 70%,
+      rgba(54, 221, 207, 0.12)
+    );
+
+  pointer-events: none;
+
+  content: "";
+}
+
+/* =========================================================
+   FUTURISTIC DATA GRID
+   ========================================================= */
+
+.kinz-data-grid {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      rgba(54, 221, 207, 0.055) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(76, 141, 255, 0.05) 1px,
+      transparent 1px
+    );
+
+  background-size: 62px 62px;
+
+  -webkit-mask-image:
+    radial-gradient(
+      circle at center,
+      black 0%,
+      rgba(0, 0, 0, 0.8) 34%,
+      transparent 78%
+    );
+  mask-image:
+    radial-gradient(
+      circle at center,
+      black 0%,
+      rgba(0, 0, 0, 0.8) 34%,
+      transparent 78%
+    );
+}
+
+.kinz-dot-field {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.48;
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(54, 221, 207, 0.34) 1px,
+      transparent 1.2px
+    );
+
+  background-size: 22px 22px;
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      transparent,
+      black 20%,
+      black 80%,
+      transparent
+    );
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent,
+      black 20%,
+      black 80%,
+      transparent
+    );
+}
+
+/* =========================================================
+   AMBIENT GLOWS
+   ========================================================= */
+
+.kinz-orb {
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  border-radius: 50%;
+
+  filter: blur(90px);
+
+  opacity: 0.15;
+
+  pointer-events: none;
+}
+
+.kinz-orb-cyan {
+  background: #2fe2d1;
+}
+
+.kinz-orb-blue {
+  background: #4c8dff;
+}
+
+/* =========================================================
+   HAIRLINES
+   ========================================================= */
+
+.kinz-hairline {
+  width: 100%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(7, 23, 34, 0.1) 14%,
+      rgba(7, 23, 34, 0.1) 86%,
+      transparent
+    );
+}
+
+.kinz-hairline-dark {
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1) 14%,
+      rgba(255, 255, 255, 0.1) 86%,
+      transparent
+    );
+}
+
+/* =========================================================
+   BUTTON FOUNDATION
+   ========================================================= */
+
+.kinz-button {
+  position: relative;
+
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  overflow: hidden;
+
+  border-radius: 14px;
+
+  padding: 0 20px;
+
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.kinz-button-primary {
+  background:
+    linear-gradient(
+      135deg,
+      #071c27,
+      #0a3340 58%,
+      #0a4b50
+    );
+
+  color: white;
+
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.12),
+    0 12px 30px rgba(5, 28, 38, 0.18);
+}
+
+.kinz-button-primary::after {
+  position: absolute;
+  top: -120%;
+  left: -36%;
+
+  width: 34%;
+  height: 320%;
+
+  transform: rotate(22deg);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+
+  content: "";
+
+  transition: left 480ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.kinz-button-secondary {
+  border: 1px solid var(--border);
+
+  background: rgba(255, 255, 255, 0.76);
+
+  color: var(--ink);
+
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.9);
+
+  backdrop-filter: blur(16px);
+}
+
+/* =========================================================
+   INTERACTIVE CARDS
+   ========================================================= */
+
+.kinz-interactive {
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 260ms ease,
+    box-shadow 260ms ease;
+}
+
+/* =========================================================
+   STATUS / DATA ELEMENTS
+   ========================================================= */
+
+.kinz-status-dot {
+  position: relative;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #23d6b5;
+
+  box-shadow:
+    0 0 0 5px rgba(35, 214, 181, 0.08);
+}
+
+.kinz-status-dot::after {
+  position: absolute;
+  inset: -6px;
+
+  border: 1px solid rgba(35, 214, 181, 0.22);
+  border-radius: inherit;
+
+  animation:
+    kinz-status-pulse 2.4s ease-out infinite;
+
+  content: "";
+}
+
+.kinz-data-beam {
+  position: absolute;
+
+  width: 160px;
+  height: 1px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(54, 221, 207, 0.12),
+      transparent
+    );
+}
+
+.kinz-data-beam::after {
+  position: absolute;
+  inset-block: 0;
+  left: -30%;
+
+  width: 34%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #75f3e7,
+      transparent
+    );
+
+  filter: drop-shadow(
+    0 0 8px rgba(54, 221, 207, 0.8)
+  );
+
+  animation:
+    kinz-beam 2.8s linear infinite;
+
+  content: "";
+}
+
+/* =========================================================
+   HERO / CINEMATIC HELPERS
+   ========================================================= */
+
+.kinz-hero-vignette {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 48%,
+      rgba(246, 249, 251, 0.68) 86%,
+      var(--page-bg) 100%
+    );
+}
+
+.kinz-scanline {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+
+  height: 160px;
+
+  pointer-events: none;
+
+  opacity: 0.2;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(54, 221, 207, 0.13),
+      transparent
+    );
+
+  animation:
+    kinz-scan 7s ease-in-out infinite;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  :root {
+    --nav-height: 68px;
+  }
+
+  .kinz-container,
+  .kinz-container-wide {
+    width: min(
+      calc(100% - 28px),
+      var(--container)
+    );
+  }
+
+  .kinz-section {
+    padding-block: 78px;
+  }
+
+  .kinz-section-tight {
+    padding-block: 58px;
+  }
+}
+
+/* =========================================================
+   HOVER ENHANCEMENTS
+   ========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+  .kinz-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .kinz-button-primary:hover {
+    box-shadow:
+      inset 0 1px rgba(255, 255, 255, 0.13),
+      0 18px 42px rgba(5, 28, 38, 0.24);
+  }
+
+  .kinz-button-primary:hover::after {
+    left: 116%;
+  }
+
+  .kinz-button-secondary:hover {
+    border-color: rgba(7, 23, 34, 0.16);
+
+    background: rgba(255, 255, 255, 0.94);
+
+    box-shadow:
+      0 12px 28px rgba(7, 23, 34, 0.07);
+  }
+
+  .kinz-interactive:hover {
+    transform: translateY(-4px);
+
+    border-color: rgba(21, 200, 187, 0.2);
+
+    box-shadow:
+      0 24px 70px rgba(7, 23, 34, 0.1);
+  }
+}
+
+/* =========================================================
+   KEYFRAMES
+   ========================================================= */
+
+@keyframes kinz-status-pulse {
+  0% {
+    transform: scale(0.72);
+    opacity: 0;
+  }
+
+  24% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+
+@keyframes kinz-beam {
+  from {
+    left: -34%;
+  }
+
+  to {
+    left: 112%;
+  }
+}
+
+@keyframes kinz-scan {
+  0%,
+  100% {
+    transform: translateY(-150%);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.18;
+  }
+
+  55% {
+    opacity: 0.22;
+  }
+
+  80% {
+    transform: translateY(520%);
+    opacity: 0;
+  }
+}
+
+@keyframes kinz-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+@keyframes kinz-soft-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.75;
+    transform: scale(1.04);
+  }
+}
+
+/* =========================================================
+   HIGH-CONTRAST / FORCED COLORS
+   ========================================================= */
+
+@media (forced-colors: active) {
+  .kinz-button,
+  .kinz-eyebrow,
+  .kinz-glass,
+  .kinz-glass-dark {
+    border: 1px solid CanvasText;
+  }
+
+  .kinz-gradient-text,
+  .kinz-gradient-text-light {
+    background: none;
+    color: CanvasText;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

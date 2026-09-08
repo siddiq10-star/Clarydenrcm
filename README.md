@@ -34,3 +34,61 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+kinz-healthops/
+│
+├── public/
+│   ├── brand/
+│   ├── images/
+│   ├── icons/
+│   └── og/
+│
+├── src/
+│   ├── app/
+│   │   ├── about/
+│   │   ├── contact/
+│   │   ├── how-it-works/
+│   │   ├── insights/
+│   │   ├── rcm-assessment/
+│   │   ├── security/
+│   │   │
+│   │   ├── services/
+│   │   │   ├── medical-billing/
+│   │   │   ├── ar-management/
+│   │   │   ├── denial-management/
+│   │   │   ├── payment-posting/
+│   │   │   ├── eligibility-verification/
+│   │   │   ├── prior-authorization/
+│   │   │   ├── credentialing/
+│   │   │   └── medical-coding/
+│   │   │
+│   │   ├── specialties/
+│   │   │
+│   │   ├── privacy-policy/
+│   │   ├── terms/
+│   │   │
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   │
+│   ├── components/
+│   │   ├── layout/
+│   │   └── ui/
+│   │
+│   ├── features/
+│   │   ├── home/
+│   │   ├── assessment/
+│   │   ├── services/
+│   │   └── specialties/
+│   │
+│   ├── config/
+│   │   ├── site.ts
+│   │   └── navigation.ts
+│   │
+│   ├── lib/
+│   ├── types/
+│   └── constants/
+│
+├── package.json
+├── postcss.config.mjs
+└── tsconfig.json
