@@ -1,10 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "react";
+import type {
+  KeyboardEvent,
+  ReactNode,
+  Ref,
+} from "react";
+
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowUpRight,
   ChevronDown,
@@ -21,14 +33,109 @@ import {
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
-type OpenMenu = "services" | "specialties" | null;
+/* -------------------------------------------------------------------------- */
+/* Types                                                                      */
+/* -------------------------------------------------------------------------- */
+
+type MenuName = "services" | "specialties";
+
+type NavigationItem = {
+  label: string;
+  href: string;
+  description?: string;
+};
+
+type NavigationGroup = {
+  label: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  items: readonly NavigationItem[];
+  overviewLabel: string;
+  overviewDescription: string;
+  overviewHref: string;
+};
+
+/* -------------------------------------------------------------------------- */
+/* Navigation configuration                                                   */
+/* -------------------------------------------------------------------------- */
+
+const NAVIGATION: Record<MenuName, NavigationGroup> = {
+  services: {
+    label: "Services",
+    eyebrow: "Revenue Operations",
+    title: "End-to-end RCM infrastructure.",
+    description:
+      "From eligibility and claims to denials, A/R and payment reconciliation.",
+    items: serviceNavigation.items,
+    overviewLabel: "Explore all services",
+    overviewDescription:
+      "See the complete Claryden RCM revenue-cycle operating model.",
+    overviewHref: siteConfig.routes.services,
+  },
+
+  specialties: {
+    label: "Specialties",
+    eyebrow: "Specialty Expertise",
+    title: "RCM built around how practices actually operate.",
+    description:
+      "Specialty-aware workflows without forcing every practice into the same process.",
+    items: specialtyNavigation.items,
+    overviewLabel: "View all specialties",
+    overviewDescription:
+      "Explore revenue-cycle support across medical specialties.",
+    overviewHref: siteConfig.routes.specialties,
+  },
+};
+
+const FOCUS_RING =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#138e91] focus-visible:ring-offset-2";
+
+/* -------------------------------------------------------------------------- */
+/* Route helpers                                                              */
+/* -------------------------------------------------------------------------- */
+
+function normalizePath(path: string) {
+  return path.replace(/\/+$/, "") || "/";
+}
+
+function isCurrentPage(pathname: string, href: string) {
+  return normalizePath(pathname) === normalizePath(href);
+}
+
+function isActiveRoute(pathname: string, href: string) {
+  const current = normalizePath(pathname);
+  const target = normalizePath(href);
+
+  return (
+    current === target ||
+    (target !== "/" && current.startsWith(`${target}/`))
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Site Header                                                                */
+/* -------------------------------------------------------------------------- */
 
 export function SiteHeader() {
   const pathname = usePathname();
 
+  const headerRef = useRef<HTMLElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  const mobileDialogId = useId();
+
   const [scrolled, setScrolled] = useState(false);
-  const [openMenu, setOpenMenu] = useState<OpenMenu>(null);
+  const [openMenu, setOpenMenu] = useState<MenuName | null>(
+    null
+  );
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const closeMobile = useCallback(() => {
+    setMobileOpen(false);
+  }, []);
+
+  /* Scroll appearance */
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,292 +153,450 @@ export function SiteHeader() {
     };
   }, []);
 
+  /* Close navigation after route changes */
+
   useEffect(() => {
     setOpenMenu(null);
     setMobileOpen(false);
   }, [pathname]);
 
+  /* Close desktop menus on outside click or Escape */
+
   useEffect(() => {
+    if (!openMenu) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (
+        !headerRef.current?.contains(event.target as Node)
+      ) {
+        setOpenMenu(null);
+      }
+    };
+
+    const handleKeyDown = (
+      event: globalThis.KeyboardEvent
+    ) => {
+      if (event.key === "Escape") {
+        setOpenMenu(null);
+      }
+    };
+
+    document.addEventListener(
+      "pointerdown",
+      handlePointerDown
+    );
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener(
+        "pointerdown",
+        handlePointerDown
+      );
+      document.removeEventListener(
+        "keydown",
+        handleKeyDown
+      );
+    };
+  }, [openMenu]);
+
+  /* Reset navigation when crossing the desktop breakpoint */
+
+  useEffect(() => {
+    const media = window.matchMedia(
+      "(min-width: 1280px)"
+    );
+
+    const handleBreakpointChange = () => {
+      setOpenMenu(null);
+      setMobileOpen(false);
+    };
+
+    media.addEventListener(
+      "change",
+      handleBreakpointChange
+    );
+
+    return () => {
+      media.removeEventListener(
+        "change",
+        handleBreakpointChange
+      );
+    };
+  }, []);
+
+  /* Native mobile dialog */
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+
+    if (!dialog) return;
+
     if (!mobileOpen) {
-      document.body.style.overflow = "";
+      if (dialog.open) dialog.close();
       return;
     }
 
+    const previousOverflow =
+      document.body.style.overflow;
+
     document.body.style.overflow = "hidden";
 
+    if (!dialog.open) {
+      dialog.showModal();
+    }
+
     return () => {
-      document.body.style.overflow = "";
+      if (dialog.open) dialog.close();
+
+      document.body.style.overflow =
+        previousOverflow;
     };
   }, [mobileOpen]);
 
   return (
     <>
       <header
+        ref={headerRef}
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-          scrolled ? "pt-3" : "pt-4 lg:pt-5"
+          "fixed inset-x-0 top-0 z-50 pt-3 transition-[padding] duration-300 motion-reduce:transition-none",
+          !scrolled && "sm:pt-4 xl:pt-5"
         )}
       >
         <div className="kinz-container-wide">
-          <motion.div
-            animate={{
-              y: scrolled ? 0 : 2,
-            }}
-            transition={{
-              duration: 0.4,
-              ease: [0.22, 1, 0.36, 1],
-            }}
+          <div
             className={cn(
-              "relative mx-auto flex h-[68px] items-center justify-between rounded-[20px] border px-4 transition-all duration-500 lg:h-[72px] lg:px-5",
+              "relative mx-auto grid min-h-[68px] grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-[20px] border px-3 shadow-sm transition-[background-color,border-color,box-shadow] duration-300 sm:px-4 xl:min-h-[76px] xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] xl:gap-4 xl:px-5 motion-reduce:transition-none",
               scrolled
-                ? "border-black/[0.08] bg-white/88 shadow-[0_18px_60px_rgba(7,23,34,0.10)] backdrop-blur-2xl"
-                : "border-black/[0.06] bg-white/60 shadow-[0_8px_30px_rgba(7,23,34,0.04)] backdrop-blur-xl"
+                ? "border-[#102b36]/10 bg-white/95 shadow-[0_16px_48px_rgba(7,23,34,0.10)] backdrop-blur-2xl"
+                : "border-[#102b36]/[0.07] bg-white/90 shadow-[0_8px_30px_rgba(7,23,34,0.05)] backdrop-blur-xl"
             )}
           >
             <Brand />
 
             <DesktopNavigation
+              pathname={pathname}
               openMenu={openMenu}
               setOpenMenu={setOpenMenu}
-              pathname={pathname}
             />
 
-            <div className="hidden items-center gap-2 lg:flex">
-              <Link
+            <div className="hidden items-center justify-self-end gap-1.5 xl:flex">
+              <HeaderLink
                 href={siteConfig.routes.contact}
-                className="rounded-xl px-4 py-3 text-sm font-semibold text-[#29434f] transition-colors hover:bg-black/[0.04] hover:text-[#071722]"
+                pathname={pathname}
               >
                 Contact
-              </Link>
+              </HeaderLink>
 
-              <Link
-                href={siteConfig.routes.assessment}
-                className="group relative inline-flex min-h-11 items-center justify-center gap-2 overflow-hidden rounded-[13px] bg-[#071c27] px-4 text-sm font-semibold !text-white shadow-[0_10px_28px_rgba(5,28,38,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_36px_rgba(5,28,38,0.24)]"
-              >
-                <span>RCM Assessment</span>
-
-                <ArrowUpRight
-                  aria-hidden="true"
-                  className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  strokeWidth={1.8}
-                />
-
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-x-5 bottom-0 h-px bg-gradient-to-r from-transparent via-[#55e8dc] to-transparent opacity-80"
-                />
-              </Link>
+              <AssessmentLink />
             </div>
 
             <button
               type="button"
-              aria-label={
-                mobileOpen
-                  ? "Close navigation"
-                  : "Open navigation"
-              }
+              aria-label="Open navigation"
+              aria-controls={mobileDialogId}
               aria-expanded={mobileOpen}
-              onClick={() => setMobileOpen((value) => !value)}
-              className="inline-flex size-11 items-center justify-center rounded-xl border border-black/[0.07] bg-white/70 text-[#071722] transition-colors hover:bg-white lg:hidden"
-            >
-              {mobileOpen ? (
-                <X className="size-5" />
-              ) : (
-                <Menu className="size-5" />
+              onClick={() => {
+                setOpenMenu(null);
+                setMobileOpen(true);
+              }}
+              className={cn(
+                "inline-flex size-11 items-center justify-center justify-self-end rounded-xl border border-[#102b36]/10 bg-white text-[#071722] transition-colors hover:bg-[#f1f7f7] xl:hidden motion-reduce:transition-none",
+                FOCUS_RING
               )}
+            >
+              <Menu
+                aria-hidden="true"
+                className="size-5"
+                strokeWidth={1.8}
+              />
             </button>
-          </motion.div>
+          </div>
         </div>
       </header>
 
-      <AnimatePresence>
-        {mobileOpen ? (
-          <MobileNavigation
-            pathname={pathname}
-            onClose={() => setMobileOpen(false)}
-          />
-        ) : null}
-      </AnimatePresence>
+      <dialog
+        ref={dialogRef}
+        id={mobileDialogId}
+        aria-label="Claryden RCM navigation"
+        onCancel={(event) => {
+          event.preventDefault();
+          closeMobile();
+        }}
+        onClose={() => {
+          if (!dialogRef.current?.open) {
+            closeMobile();
+          }
+        }}
+        className="fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none overflow-hidden border-0 bg-[#f5f9fa] p-0 text-[#071722] backdrop:bg-[#071722]/30 xl:hidden"
+      >
+        <MobileNavigation
+          pathname={pathname}
+          open={mobileOpen}
+          onClose={closeMobile}
+        />
+      </dialog>
     </>
   );
 }
 
-function Brand() {
+/* -------------------------------------------------------------------------- */
+/* Brand                                                                      */
+/* -------------------------------------------------------------------------- */
+
+function Brand({
+  onClick,
+}: {
+  onClick?: () => void;
+}) {
   return (
     <Link
       href={siteConfig.routes.home}
+      onClick={onClick}
       aria-label={`${siteConfig.name} home`}
-      className="group flex shrink-0 items-center gap-3"
+      className={cn(
+        "group flex w-fit min-w-0 items-center gap-2.5 rounded-lg sm:gap-3",
+        FOCUS_RING
+      )}
     >
-      <div className="relative flex size-10 items-center justify-center overflow-hidden rounded-[13px] border border-[#0e6f72]/15 bg-[#071c27] shadow-[inset_0_1px_rgba(255,255,255,0.10),0_8px_24px_rgba(7,28,39,0.16)]">
-        <span className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(54,221,207,0.22),transparent_55%)]" />
+      <Image
+        src="/brand/claryden-mark.png"
+        alt=""
+        aria-hidden="true"
+        width={568}
+        height={472}
+        sizes="48px"
+        loading="eager"
+        className="h-auto w-10 shrink-0 object-contain sm:w-12"
+      />
 
-        <svg
-          viewBox="0 0 32 32"
-          aria-hidden="true"
-          className="relative size-6"
-        >
-          <path
-            d="M8 7V25"
-            stroke="white"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-          />
+      <span className="flex min-w-0 flex-col justify-center">
+        <Image
+          src="/brand/claryden-wordmark.png"
+          alt="Claryden RCM"
+          width={1100}
+          height={193}
+          sizes="(max-width: 639px) 146px, 166px"
+          priority
+          className="h-auto w-[146px] max-w-full object-contain sm:w-[166px]"
+        />
 
-          <path
-            d="M22.5 7.5L9 20.3"
-            stroke="#62E9DF"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-          />
-
-          <path
-            d="M14.2 15.5L23.3 25"
-            stroke="white"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-          />
-        </svg>
-
-        <span className="absolute inset-x-2 bottom-0 h-px bg-gradient-to-r from-transparent via-[#5bf0e4] to-transparent opacity-80" />
-      </div>
-
-      <div className="flex flex-col">
-        <span className="text-[15px] font-extrabold leading-none tracking-[-0.035em] text-[#071722] sm:text-[16px]">
-          CLARYDEN
-          <span className="ml-1 font-medium text-[#48606c]">
-            RCM
-          </span>
-        </span>
-
-        <span className="mt-1 hidden text-[9px] font-semibold uppercase tracking-[0.17em] text-[#7c9099] sm:block">
+        <span className="mt-1 hidden whitespace-nowrap text-[8px] font-semibold uppercase leading-none tracking-[0.115em] text-[#516774] sm:block">
           Revenue Cycle Management
         </span>
-      </div>
+      </span>
     </Link>
   );
 }
 
-interface DesktopNavigationProps {
-  openMenu: OpenMenu;
-  setOpenMenu: (menu: OpenMenu) => void;
+/* -------------------------------------------------------------------------- */
+/* Shared navigation links                                                    */
+/* -------------------------------------------------------------------------- */
+
+function HeaderLink({
+  href,
+  pathname,
+  children,
+}: {
+  href: string;
   pathname: string;
+  children: ReactNode;
+}) {
+  const active = isActiveRoute(pathname, href);
+
+  return (
+    <Link
+      href={href}
+      aria-current={
+        isCurrentPage(pathname, href)
+          ? "page"
+          : undefined
+      }
+      className={cn(
+        "inline-flex min-h-11 items-center rounded-xl px-3 text-[13px] font-semibold transition-colors hover:bg-[#071722]/[0.04] hover:text-[#071722] motion-reduce:transition-none",
+        active
+          ? "bg-[#071722]/[0.05] text-[#071722]"
+          : "text-[#405966]",
+        FOCUS_RING
+      )}
+    >
+      {children}
+    </Link>
+  );
 }
 
+function AssessmentLink({
+  onClick,
+}: {
+  onClick?: () => void;
+}) {
+  return (
+    <Link
+      href={siteConfig.routes.assessment}
+      onClick={onClick}
+      className={cn(
+        "group relative inline-flex min-h-11 items-center justify-center gap-2 overflow-hidden rounded-[13px] bg-[#071c27] px-4 text-[13px] font-semibold !text-white shadow-[0_10px_26px_rgba(5,28,38,0.16)] transition-[background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:bg-[#103744] hover:shadow-[0_14px_32px_rgba(5,28,38,0.22)] motion-reduce:transform-none motion-reduce:transition-none",
+        FOCUS_RING
+      )}
+    >
+      <span>RCM Assessment</span>
+
+      <ArrowUpRight
+        aria-hidden="true"
+        className="size-4 shrink-0"
+        strokeWidth={1.8}
+      />
+
+      <span
+        aria-hidden="true"
+        className="absolute inset-x-5 bottom-0 h-px bg-gradient-to-r from-transparent via-[#55e8dc] to-transparent"
+      />
+    </Link>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Desktop Navigation                                                         */
+/* -------------------------------------------------------------------------- */
+
 function DesktopNavigation({
+  pathname,
   openMenu,
   setOpenMenu,
-  pathname,
-}: DesktopNavigationProps) {
+}: {
+  pathname: string;
+  openMenu: MenuName | null;
+  setOpenMenu: (menu: MenuName | null) => void;
+}) {
   return (
     <nav
       aria-label="Primary navigation"
-      className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 lg:flex"
+      className="relative hidden items-center justify-center gap-0 xl:flex"
     >
-      <DesktopDropdownTrigger
-        label="Services"
-        active={
-          pathname.startsWith("/services") ||
-          openMenu === "services"
-        }
+      <DesktopDisclosure
+        name="services"
+        pathname={pathname}
         open={openMenu === "services"}
         onOpen={() => setOpenMenu("services")}
         onClose={() => setOpenMenu(null)}
-      >
-        <MegaMenu
-          eyebrow="Revenue Operations"
-          title="End-to-end RCM infrastructure."
-          description="From eligibility and claims to denials, A/R and payment reconciliation."
-          items={serviceNavigation.items}
-          highlight={{
-            icon: Sparkles,
-            label: "Explore all services",
-            description:
-              "See the complete claryden rcm revenue-cycle operating model.",
-            href: siteConfig.routes.services,
-          }}
-        />
-      </DesktopDropdownTrigger>
+      />
 
-      <DesktopDropdownTrigger
-        label="Specialties"
-        active={
-          pathname.startsWith("/specialties") ||
-          openMenu === "specialties"
-        }
+      <DesktopDisclosure
+        name="specialties"
+        pathname={pathname}
         open={openMenu === "specialties"}
         onOpen={() => setOpenMenu("specialties")}
         onClose={() => setOpenMenu(null)}
-      >
-        <MegaMenu
-          eyebrow="Specialty Expertise"
-          title="RCM built around how practices actually operate."
-          description="Specialty-aware workflows without forcing every practice into the same process."
-          items={specialtyNavigation.items}
-          highlight={{
-            icon: ShieldCheck,
-            label: "View specialties",
-            description:
-              "Explore revenue-cycle support across medical specialties.",
-            href: siteConfig.routes.specialties,
-          }}
-        />
-      </DesktopDropdownTrigger>
+      />
 
-      <DesktopLink
+      <HeaderLink
         href={siteConfig.routes.howItWorks}
-        active={pathname.startsWith(
-          siteConfig.routes.howItWorks
-        )}
+        pathname={pathname}
       >
         How It Works
-      </DesktopLink>
+      </HeaderLink>
 
-      <DesktopLink
+      <HeaderLink
         href={siteConfig.routes.security}
-        active={pathname.startsWith(
-          siteConfig.routes.security
-        )}
+        pathname={pathname}
       >
         Security
-      </DesktopLink>
+      </HeaderLink>
 
-      <DesktopLink
+      <HeaderLink
         href={siteConfig.routes.about}
-        active={pathname.startsWith(siteConfig.routes.about)}
+        pathname={pathname}
       >
         About
-      </DesktopLink>
+      </HeaderLink>
     </nav>
   );
 }
 
-interface DesktopDropdownTriggerProps {
-  label: string;
-  active: boolean;
-  open: boolean;
-  onOpen: () => void;
-  onClose: () => void;
-  children: React.ReactNode;
-}
+/* -------------------------------------------------------------------------- */
+/* Desktop Dropdown                                                           */
+/* -------------------------------------------------------------------------- */
 
-function DesktopDropdownTrigger({
-  label,
-  active,
+function DesktopDisclosure({
+  name,
+  pathname,
   open,
   onOpen,
   onClose,
-  children,
-}: DesktopDropdownTriggerProps) {
+}: {
+  name: MenuName;
+  pathname: string;
+  open: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+}) {
+  const group = NAVIGATION[name];
+
+  const panelId = useId();
+
+  const rootRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const firstLinkRef = useRef<HTMLAnchorElement>(null);
+
+  const active = isActiveRoute(
+    pathname,
+    group.overviewHref
+  );
+
+  const handleKeyDown = (
+    event: KeyboardEvent<HTMLDivElement>
+  ) => {
+    if (event.key === "Escape" && open) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      onClose();
+      triggerRef.current?.focus();
+    }
+
+    if (
+      event.key === "ArrowDown" &&
+      event.target === triggerRef.current
+    ) {
+      event.preventDefault();
+
+      onOpen();
+
+      window.requestAnimationFrame(() => {
+        firstLinkRef.current?.focus();
+      });
+    }
+  };
+
   return (
     <div
-      className="relative"
-      onMouseEnter={onOpen}
-      onMouseLeave={onClose}
+      ref={rootRef}
+      className="static"
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse") {
+          onOpen();
+        }
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType === "mouse") {
+          onClose();
+        }
+      }}
+      onBlur={(event) => {
+        if (
+          !rootRef.current?.contains(
+            event.relatedTarget as Node | null
+          )
+        ) {
+          onClose();
+        }
+      }}
+      onKeyDown={handleKeyDown}
     >
       <button
+        ref={triggerRef}
         type="button"
         aria-expanded={open}
+        aria-controls={panelId}
         onClick={() => {
           if (open) {
             onClose();
@@ -340,156 +605,160 @@ function DesktopDropdownTrigger({
           }
         }}
         className={cn(
-          "flex items-center gap-1 rounded-xl px-3 py-2.5 text-[13px] font-semibold transition-colors",
-          active
+          "inline-flex min-h-11 items-center gap-1 rounded-xl px-3 text-[13px] font-semibold transition-colors hover:bg-[#071722]/[0.04] hover:text-[#071722] motion-reduce:transition-none",
+          active || open
             ? "bg-[#071722]/[0.05] text-[#071722]"
-            : "text-[#4a616c] hover:bg-[#071722]/[0.04] hover:text-[#071722]"
+            : "text-[#405966]",
+          FOCUS_RING
         )}
       >
-        {label}
+        {group.label}
 
         <ChevronDown
           aria-hidden="true"
           className={cn(
-            "size-3.5 transition-transform duration-300",
+            "size-3.5 transition-transform duration-200 motion-reduce:transition-none",
             open && "rotate-180"
           )}
           strokeWidth={1.8}
         />
       </button>
 
-      <AnimatePresence>
-        {open ? (
-          <motion.div
-            initial={{
-              opacity: 0,
-              y: 10,
-              scale: 0.985,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-              scale: 1,
-            }}
-            exit={{
-              opacity: 0,
-              y: 8,
-              scale: 0.99,
-            }}
-            transition={{
-              duration: 0.18,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="absolute left-1/2 top-[calc(100%+18px)] w-[760px] -translate-x-1/2"
-          >
-            {children}
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+      <div
+        id={panelId}
+        hidden={!open}
+        className="absolute left-1/2 top-full z-50 w-[min(920px,calc(100vw-48px))] -translate-x-1/2 pt-4"
+      >
+        <MegaMenu
+          group={group}
+          pathname={pathname}
+          firstLinkRef={firstLinkRef}
+        />
+      </div>
     </div>
   );
 }
 
-interface MegaMenuProps {
-  eyebrow: string;
-  title: string;
-  description: string;
-  items: {
-    label: string;
-    href: string;
-    description?: string;
-  }[];
-  highlight: {
-    icon: React.ComponentType<{
-      className?: string;
-      strokeWidth?: number;
-    }>;
-    label: string;
-    description: string;
-    href: string;
-  };
-}
+/* -------------------------------------------------------------------------- */
+/* Mega Menu                                                                  */
+/* -------------------------------------------------------------------------- */
 
 function MegaMenu({
-  eyebrow,
-  title,
-  description,
-  items,
-  highlight,
-}: MegaMenuProps) {
-  const HighlightIcon = highlight.icon;
-
+  group,
+  pathname,
+  firstLinkRef,
+}: {
+  group: NavigationGroup;
+  pathname: string;
+  firstLinkRef: Ref<HTMLAnchorElement>;
+}) {
   return (
-    <div className="overflow-hidden rounded-[24px] border border-black/[0.08] bg-white/96 shadow-[0_30px_90px_rgba(7,23,34,0.14)] backdrop-blur-2xl">
-      <div className="grid grid-cols-[0.76fr_1.24fr]">
-        <div className="relative overflow-hidden border-r border-black/[0.06] bg-[#071722] p-7 !text-white">
-          <div className="kinz-data-grid opacity-40" />
+    <div className="max-h-[calc(100dvh-124px)] overflow-y-auto overscroll-contain rounded-[24px] border border-[#102b36]/10 bg-white shadow-[0_28px_80px_rgba(7,23,34,0.16)]">
+      <div className="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        {/* Left feature panel */}
+
+        <div className="relative overflow-hidden bg-[#071c27] p-7 text-white">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-20 -top-24 size-64 rounded-full bg-[#47d8ce]/10 blur-3xl"
+          />
 
           <div className="relative">
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#6fe9df]">
-              {eyebrow}
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#91e8e0]">
+              {group.eyebrow}
             </p>
 
-            <h3 className="mt-4 max-w-[260px] text-[24px] font-semibold leading-[1.08] tracking-[-0.04em]">
-              {title}
-            </h3>
+            <h2 className="mt-4 max-w-[310px] text-[25px] font-semibold leading-[1.12] tracking-[-0.04em] !text-white">
+              {group.title}
+            </h2>
 
-            <p className="mt-4 max-w-[285px] text-sm leading-6 !text-white/55">
-              {description}
+            <p className="mt-4 max-w-[320px] text-[13px] leading-6 !text-white/75">
+              {group.description}
             </p>
 
             <Link
-              href={highlight.href}
-              className="group mt-8 flex items-start gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.045] p-4 transition-colors hover:bg-white/[0.075]"
+              ref={firstLinkRef}
+              href={group.overviewHref}
+              aria-current={
+                isCurrentPage(
+                  pathname,
+                  group.overviewHref
+                )
+                  ? "page"
+                  : undefined
+              }
+              className={cn(
+                "group mt-7 flex items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.045] p-4 transition-colors hover:bg-white/[0.09] motion-reduce:transition-none",
+                FOCUS_RING
+              )}
             >
-              <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[#55dfd4]/10 text-[#69e9df]">
-                <HighlightIcon
-                  className="size-4"
-                  strokeWidth={1.8}
-                />
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[#55dfd4]/10 text-[#91e8e0]">
+                {group === NAVIGATION.services ? (
+                  <Sparkles
+                    aria-hidden="true"
+                    className="size-4"
+                    strokeWidth={1.8}
+                  />
+                ) : (
+                  <ShieldCheck
+                    aria-hidden="true"
+                    className="size-4"
+                    strokeWidth={1.8}
+                  />
+                )}
               </span>
 
-              <span>
+              <span className="min-w-0">
                 <span className="flex items-center gap-1.5 text-sm font-semibold !text-white">
-                  {highlight.label}
+                  {group.overviewLabel}
 
                   <ArrowUpRight
-                    className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    strokeWidth={1.8}
+                    aria-hidden="true"
+                    className="size-3.5 shrink-0"
                   />
                 </span>
 
-                <span className="mt-1 block text-xs leading-5 !text-white/45">
-                  {highlight.description}
+                <span className="mt-1 block text-xs leading-5 !text-white/70">
+                  {group.overviewDescription}
                 </span>
               </span>
             </Link>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-1 p-4">
-          {items.map((item) => (
+        {/* Navigation links */}
+
+        <div className="grid grid-cols-2 content-start gap-1 p-4">
+          {group.items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="group rounded-2xl p-4 transition-colors hover:bg-[#071722]/[0.035]"
+              aria-current={
+                isCurrentPage(pathname, item.href)
+                  ? "page"
+                  : undefined
+              }
+              className={cn(
+                "group rounded-2xl p-4 transition-colors hover:bg-[#eef6f6] motion-reduce:transition-none",
+                FOCUS_RING
+              )}
             >
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-sm font-semibold tracking-[-0.01em] text-[#132b36]">
+              <span className="flex items-start justify-between gap-2">
+                <span className="text-[13px] font-semibold leading-5 text-[#132b36]">
                   {item.label}
                 </span>
 
                 <ArrowUpRight
                   aria-hidden="true"
-                  className="size-3.5 shrink-0 text-[#8ba0aa] opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
+                  className="mt-0.5 size-3.5 shrink-0 text-[#637c88] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none"
                   strokeWidth={1.8}
                 />
-              </div>
+              </span>
 
               {item.description ? (
-                <p className="mt-1.5 line-clamp-2 text-xs leading-5 text-[#71858f]">
+                <span className="mt-1.5 block text-xs leading-5 text-[#516774]">
                   {item.description}
-                </p>
+                </span>
               ) : null}
             </Link>
           ))}
@@ -499,110 +768,92 @@ function MegaMenu({
   );
 }
 
-interface DesktopLinkProps {
-  href: string;
-  active: boolean;
-  children: React.ReactNode;
-}
-
-function DesktopLink({
-  href,
-  active,
-  children,
-}: DesktopLinkProps) {
-  return (
-    <Link
-      href={href}
-      className={cn(
-        "rounded-xl px-3 py-2.5 text-[13px] font-semibold transition-colors",
-        active
-          ? "bg-[#071722]/[0.05] text-[#071722]"
-          : "text-[#4a616c] hover:bg-[#071722]/[0.04] hover:text-[#071722]"
-      )}
-    >
-      {children}
-    </Link>
-  );
-}
-
-interface MobileNavigationProps {
-  pathname: string;
-  onClose: () => void;
-}
+/* -------------------------------------------------------------------------- */
+/* Mobile Navigation                                                          */
+/* -------------------------------------------------------------------------- */
 
 function MobileNavigation({
   pathname,
+  open,
   onClose,
-}: MobileNavigationProps) {
-  const [section, setSection] = useState<OpenMenu>(null);
+}: {
+  pathname: string;
+  open: boolean;
+  onClose: () => void;
+}) {
+  const [section, setSection] = useState<MenuName | null>(
+    null
+  );
+
+  useEffect(() => {
+    if (!open) {
+      setSection(null);
+    }
+  }, [open]);
 
   return (
-    <motion.div
-      initial={{
-        opacity: 0,
-      }}
-      animate={{
-        opacity: 1,
-      }}
-      exit={{
-        opacity: 0,
-      }}
-      transition={{
-        duration: 0.2,
-      }}
-      className="fixed inset-0 z-40 bg-[#f5f9fa]/96 pt-[96px] backdrop-blur-2xl lg:hidden"
-    >
-      <motion.div
-        initial={{
-          opacity: 0,
-          y: -14,
-        }}
-        animate={{
-          opacity: 1,
-          y: 0,
-        }}
-        exit={{
-          opacity: 0,
-          y: -10,
-        }}
-        transition={{
-          duration: 0.28,
-          ease: [0.22, 1, 0.36, 1],
-        }}
-        className="kinz-container flex h-[calc(100dvh-110px)] flex-col overflow-y-auto pb-8"
-      >
-        <div className="space-y-2">
+    <div className="mx-auto flex h-full w-full max-w-3xl flex-col">
+      {/* Mobile header */}
+
+      <div className="flex min-h-[80px] shrink-0 items-center justify-between gap-3 border-b border-[#102b36]/[0.07] px-5 sm:px-7">
+        <Brand onClick={onClose} />
+
+        <button
+          type="button"
+          autoFocus
+          aria-label="Close navigation"
+          onClick={onClose}
+          className={cn(
+            "inline-flex size-11 shrink-0 items-center justify-center rounded-xl border border-[#102b36]/10 bg-white text-[#071722] transition-colors hover:bg-[#edf5f5] motion-reduce:transition-none",
+            FOCUS_RING
+          )}
+        >
+          <X
+            aria-hidden="true"
+            className="size-5"
+            strokeWidth={1.8}
+          />
+        </button>
+      </div>
+
+      {/* Scrollable navigation content */}
+
+      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pb-[max(28px,env(safe-area-inset-bottom))] pt-5 sm:px-7">
+        <nav
+          aria-label="Mobile navigation"
+          className="space-y-2"
+        >
           <MobileAccordion
-            label="Services"
+            name="services"
+            pathname={pathname}
             open={section === "services"}
-            onClick={() =>
+            onToggle={() =>
               setSection(
                 section === "services"
                   ? null
                   : "services"
               )
             }
-            items={serviceNavigation.items}
+            onNavigate={onClose}
           />
 
           <MobileAccordion
-            label="Specialties"
+            name="specialties"
+            pathname={pathname}
             open={section === "specialties"}
-            onClick={() =>
+            onToggle={() =>
               setSection(
                 section === "specialties"
                   ? null
                   : "specialties"
               )
             }
-            items={specialtyNavigation.items}
+            onNavigate={onClose}
           />
 
           <MobileLink
             href={siteConfig.routes.howItWorks}
-            active={pathname.startsWith(
-              siteConfig.routes.howItWorks
-            )}
+            pathname={pathname}
             onClick={onClose}
           >
             How It Works
@@ -610,9 +861,7 @@ function MobileNavigation({
 
           <MobileLink
             href={siteConfig.routes.security}
-            active={pathname.startsWith(
-              siteConfig.routes.security
-            )}
+            pathname={pathname}
             onClick={onClose}
           >
             Security
@@ -620,9 +869,7 @@ function MobileNavigation({
 
           <MobileLink
             href={siteConfig.routes.about}
-            active={pathname.startsWith(
-              siteConfig.routes.about
-            )}
+            pathname={pathname}
             onClick={onClose}
           >
             About
@@ -630,152 +877,200 @@ function MobileNavigation({
 
           <MobileLink
             href={siteConfig.routes.contact}
-            active={pathname.startsWith(
-              siteConfig.routes.contact
-            )}
+            pathname={pathname}
             onClick={onClose}
           >
             Contact
           </MobileLink>
-        </div>
+        </nav>
 
-        <div className="mt-auto pt-10">
-          <div className="overflow-hidden rounded-[24px] bg-[#071722] p-5 !text-white">
-            <div className="kinz-eyebrow kinz-eyebrow-dark">
+        {/* Mobile conversion CTA */}
+
+        <div className="relative mt-7 overflow-hidden rounded-[24px] bg-[#071c27] p-5 text-white sm:p-6">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-14 -top-20 size-48 rounded-full bg-[#47d8ce]/10 blur-3xl"
+          />
+
+          <div className="relative">
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#91e8e0]">
               Revenue Cycle Review
-            </div>
+            </p>
 
-            <h3 className="mt-4 text-[25px] font-semibold leading-tight tracking-[-0.04em]">
-              Find where your revenue cycle is losing momentum.
-            </h3>
+            <h2 className="mt-4 max-w-md text-[24px] font-semibold leading-tight tracking-[-0.04em] !text-white">
+              Find where your revenue cycle is losing
+              momentum.
+            </h2>
 
-            <p className="mt-3 text-sm leading-6 !text-white/55">
-              Start with a structured RCM assessment before discussing a service transition.
+            <p className="mt-3 max-w-md text-sm leading-6 !text-white/75">
+              Start with a structured RCM assessment
+              before discussing a service transition.
             </p>
 
             <Link
               href={siteConfig.routes.assessment}
               onClick={onClose}
-              className="mt-5 flex min-h-12 items-center justify-center gap-2 rounded-xl bg-white px-5 text-sm font-semibold text-[#071722]"
+              className={cn(
+                "mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-white px-5 text-sm font-semibold !text-[#071c27] transition-colors hover:bg-[#e7f7f5] motion-reduce:transition-none",
+                FOCUS_RING
+              )}
             >
               Request Assessment
 
               <ArrowUpRight
+                aria-hidden="true"
                 className="size-4"
                 strokeWidth={1.8}
               />
             </Link>
           </div>
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }
 
-interface MobileAccordionProps {
-  label: string;
-  open: boolean;
-  onClick: () => void;
-  items: {
-    label: string;
-    href: string;
-    description?: string;
-  }[];
-}
+/* -------------------------------------------------------------------------- */
+/* Mobile Accordion                                                           */
+/* -------------------------------------------------------------------------- */
 
 function MobileAccordion({
-  label,
+  name,
+  pathname,
   open,
-  onClick,
-  items,
-}: MobileAccordionProps) {
+  onToggle,
+  onNavigate,
+}: {
+  name: MenuName;
+  pathname: string;
+  open: boolean;
+  onToggle: () => void;
+  onNavigate: () => void;
+}) {
+  const group = NAVIGATION[name];
+  const panelId = useId();
+
+  const active = isActiveRoute(
+    pathname,
+    group.overviewHref
+  );
+
   return (
-    <div className="overflow-hidden rounded-2xl border border-black/[0.06] bg-white/55">
+    <div className="overflow-hidden rounded-2xl border border-[#102b36]/[0.07] bg-white">
       <button
         type="button"
-        onClick={onClick}
         aria-expanded={open}
-        className="flex w-full items-center justify-between px-5 py-4 text-left text-[16px] font-semibold text-[#102933]"
+        aria-controls={panelId}
+        onClick={onToggle}
+        className={cn(
+          "flex min-h-14 w-full items-center justify-between gap-3 px-5 py-3.5 text-left text-[15px] font-semibold transition-colors hover:bg-[#f1f7f7] motion-reduce:transition-none",
+          active || open
+            ? "text-[#075e63]"
+            : "text-[#102933]",
+          FOCUS_RING
+        )}
       >
-        {label}
+        {group.label}
 
         <ChevronDown
+          aria-hidden="true"
           className={cn(
-            "size-4 transition-transform duration-300",
+            "size-4 shrink-0 transition-transform duration-200 motion-reduce:transition-none",
             open && "rotate-180"
           )}
           strokeWidth={1.8}
         />
       </button>
 
-      <AnimatePresence initial={false}>
-        {open ? (
-          <motion.div
-            initial={{
-              height: 0,
-              opacity: 0,
-            }}
-            animate={{
-              height: "auto",
-              opacity: 1,
-            }}
-            exit={{
-              height: 0,
-              opacity: 0,
-            }}
-            transition={{
-              duration: 0.25,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            <div className="border-t border-black/[0.05] px-2 py-2">
-              {items.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="block rounded-xl px-3 py-3 transition-colors hover:bg-black/[0.035]"
-                >
-                  <span className="block text-sm font-semibold text-[#19333e]">
-                    {item.label}
-                  </span>
+      <div
+        id={panelId}
+        hidden={!open}
+        className="border-t border-[#102b36]/[0.06] px-2 py-2"
+      >
+        <Link
+          href={group.overviewHref}
+          onClick={onNavigate}
+          aria-current={
+            isCurrentPage(pathname, group.overviewHref)
+              ? "page"
+              : undefined
+          }
+          className={cn(
+            "flex min-h-12 items-center justify-between gap-3 rounded-xl bg-[#edf7f6] px-3 py-3 text-sm font-semibold text-[#075e63]",
+            FOCUS_RING
+          )}
+        >
+          {group.overviewLabel}
 
-                  {item.description ? (
-                    <span className="mt-1 block text-xs leading-5 text-[#758892]">
-                      {item.description}
-                    </span>
-                  ) : null}
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+          <ArrowUpRight
+            aria-hidden="true"
+            className="size-4 shrink-0"
+          />
+        </Link>
+
+        {group.items.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            onClick={onNavigate}
+            aria-current={
+              isCurrentPage(pathname, item.href)
+                ? "page"
+                : undefined
+            }
+            className={cn(
+              "block rounded-xl px-3 py-3 transition-colors hover:bg-[#f1f7f7] motion-reduce:transition-none",
+              FOCUS_RING
+            )}
+          >
+            <span className="block text-sm font-semibold text-[#19333e]">
+              {item.label}
+            </span>
+
+            {item.description ? (
+              <span className="mt-1 block text-xs leading-5 text-[#516774]">
+                {item.description}
+              </span>
+            ) : null}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
 
-interface MobileLinkProps {
-  href: string;
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}
+/* -------------------------------------------------------------------------- */
+/* Mobile Link                                                                */
+/* -------------------------------------------------------------------------- */
 
 function MobileLink({
   href,
-  active,
+  pathname,
   onClick,
   children,
-}: MobileLinkProps) {
+}: {
+  href: string;
+  pathname: string;
+  onClick: () => void;
+  children: ReactNode;
+}) {
+  const active = isActiveRoute(pathname, href);
+
   return (
     <Link
       href={href}
       onClick={onClick}
+      aria-current={
+        isCurrentPage(pathname, href)
+          ? "page"
+          : undefined
+      }
       className={cn(
-        "flex min-h-14 items-center rounded-2xl border px-5 text-[16px] font-semibold transition-colors",
+        "flex min-h-14 items-center rounded-2xl border px-5 py-3.5 text-[15px] font-semibold transition-colors hover:bg-[#f1f7f7] motion-reduce:transition-none",
         active
-          ? "border-[#15c8bb]/20 bg-[#15c8bb]/[0.06] text-[#083f43]"
-          : "border-black/[0.06] bg-white/55 text-[#102933]"
+          ? "border-[#138e91]/20 bg-[#eaf7f5] text-[#075e63]"
+          : "border-[#102b36]/[0.07] bg-white text-[#102933]",
+        FOCUS_RING
       )}
     >
       {children}

@@ -1,12 +1,22 @@
-import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type {
+  Metadata,
+  Viewport,
+} from "next";
+
+import {
+  Geist,
+  Geist_Mono,
+} from "next/font/google";
 
 import "@/app/globals.css";
 
+import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteHeader } from "@/components/layout/site-header";
 import { siteConfig } from "@/config/site";
 
-import { SiteHeader } from "@/components/layout/site-header";
-import { SiteFooter } from "@/components/layout/site-footer";
+/* -------------------------------------------------------------------------- */
+/* Fonts                                                                      */
+/* -------------------------------------------------------------------------- */
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -21,12 +31,20 @@ const geistMono = Geist_Mono({
   preload: false,
 });
 
+/* -------------------------------------------------------------------------- */
+/* Shared social image                                                        */
+/* -------------------------------------------------------------------------- */
+
 const socialImage = {
   url: "/og/claryden-rcm-og.jpg",
   width: 1200,
   height: 630,
   alt: `${siteConfig.name} — ${siteConfig.positioning}`,
 } as const;
+
+/* -------------------------------------------------------------------------- */
+/* Global metadata                                                            */
+/* -------------------------------------------------------------------------- */
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -36,9 +54,9 @@ export const metadata: Metadata = {
     template: siteConfig.seo.titleTemplate,
   },
 
-  description: siteConfig.description,
-
-  keywords: [...siteConfig.seo.keywords],
+  description:
+    siteConfig.seo.defaultDescription ??
+    siteConfig.description,
 
   applicationName: siteConfig.name,
 
@@ -50,23 +68,44 @@ export const metadata: Metadata = {
   ],
 
   creator: siteConfig.name,
+
   publisher: siteConfig.name,
 
   category: "Healthcare",
 
+  keywords: [...siteConfig.seo.keywords],
+
+  alternates: {
+    canonical: "/",
+  },
+
   openGraph: {
     type: "website",
-    locale: "en_US",
+
+    url: siteConfig.url,
+
     siteName: siteConfig.name,
+
+    locale: siteConfig.locale,
+
     title: siteConfig.seo.defaultTitle,
-    description: siteConfig.description,
+
+    description:
+      siteConfig.seo.defaultDescription ??
+      siteConfig.description,
+
     images: [socialImage],
   },
 
   twitter: {
     card: "summary_large_image",
+
     title: siteConfig.seo.defaultTitle,
-    description: siteConfig.description,
+
+    description:
+      siteConfig.seo.defaultDescription ??
+      siteConfig.description,
+
     images: [socialImage.url],
   },
 
@@ -77,8 +116,11 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+
       "max-image-preview": "large",
+
       "max-snippet": -1,
+
       "max-video-preview": -1,
     },
   },
@@ -108,14 +150,40 @@ export const metadata: Metadata = {
       },
     ],
   },
+
+  referrer: "origin-when-cross-origin",
+
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
 };
+
+/* -------------------------------------------------------------------------- */
+/* Viewport                                                                   */
+/* -------------------------------------------------------------------------- */
 
 export const viewport: Viewport = {
   width: "device-width",
+
   initialScale: 1,
-  themeColor: "#f6f9fb",
+
+  viewportFit: "cover",
+
+  themeColor: [
+    {
+      media: "(prefers-color-scheme: light)",
+      color: "#f7fafb",
+    },
+  ],
+
   colorScheme: "light",
 };
+
+/* -------------------------------------------------------------------------- */
+/* Root layout                                                                */
+/* -------------------------------------------------------------------------- */
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -126,11 +194,15 @@ export default function RootLayout({
 }: Readonly<RootLayoutProps>) {
   return (
     <html
-      lang="en-US"
+      lang={siteConfig.language}
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
-      <body>
-        <a href="#main-content" className="skip-link">
+      <body className="min-w-0 bg-[#f7fafb] text-[#071722] antialiased">
+        <a
+          href="#main-content"
+          className="skip-link"
+        >
           Skip to main content
         </a>
 
@@ -139,6 +211,7 @@ export default function RootLayout({
 
           <main
             id="main-content"
+            tabIndex={-1}
             className="min-w-0 flex-1"
           >
             {children}

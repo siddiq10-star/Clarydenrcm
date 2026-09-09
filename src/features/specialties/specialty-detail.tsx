@@ -2,11 +2,11 @@ import Link from "next/link";
 
 import {
   Activity,
-  ArrowLeft,
   ArrowRight,
-  BadgeCheck,
   Bone,
   Brain,
+  Check,
+  ChevronRight,
   HeartPulse,
   ShieldCheck,
   Sparkles,
@@ -24,6 +24,30 @@ import {
 
 import type { SpecialtyDefinition } from "./specialties-data";
 
+/* -------------------------------------------------------------------------- */
+/* Shared styling                                                             */
+/* -------------------------------------------------------------------------- */
+
+const focusRing =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b7775] focus-visible:ring-offset-2";
+
+const eyebrow =
+  "text-xs font-bold uppercase leading-5 tracking-[0.14em] text-[#0b716e]";
+
+const sectionTitle =
+  "text-[clamp(2rem,3.4vw,3.5rem)] font-semibold leading-[1.12] tracking-[-0.045em] text-[#0b2732]";
+
+const bodyText =
+  "text-base leading-7 text-[#405966] sm:text-lg sm:leading-8";
+
+const primaryAction =
+  "group inline-flex min-h-12 w-full items-center justify-center gap-2.5 rounded-2xl bg-[#071c27] px-6 py-3.5 text-center text-sm font-semibold !text-white shadow-[0_12px_30px_rgba(5,28,38,0.14)] transition-[background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:bg-[#103744] hover:shadow-[0_16px_36px_rgba(5,28,38,0.20)] sm:w-auto sm:text-base motion-reduce:transform-none motion-reduce:transition-none " +
+  focusRing;
+
+const secondaryAction =
+  "inline-flex min-h-12 w-full items-center justify-center rounded-2xl border border-[#17343f]/15 bg-white px-6 py-3.5 text-center text-sm font-semibold !text-[#17343f] transition-[border-color,background-color] duration-200 hover:border-[#0b7775]/30 hover:bg-[#edf7f6] sm:w-auto sm:text-base motion-reduce:transition-none " +
+  focusRing;
+
 const specialtyIcons: Record<string, LucideIcon> = {
   "behavioral-health": Brain,
   "family-medicine": UserRound,
@@ -34,6 +58,37 @@ const specialtyIcons: Record<string, LucideIcon> = {
   "physical-therapy": Activity,
   "pain-management": ShieldCheck,
 };
+
+const operatingSteps = [
+  {
+    number: "01",
+    title: "Understand",
+    description:
+      "Review the specialty, practice systems, payer mix and current revenue-cycle challenges.",
+  },
+  {
+    number: "02",
+    title: "Define",
+    description:
+      "Agree on service scope, responsibilities, access requirements and escalation procedures.",
+  },
+  {
+    number: "03",
+    title: "Coordinate",
+    description:
+      "Establish the administrative workflows and handoffs required for the engagement.",
+  },
+  {
+    number: "04",
+    title: "Review",
+    description:
+      "Use agreed reporting and operational reviews to identify unresolved issues and improvement opportunities.",
+  },
+] as const;
+
+/* -------------------------------------------------------------------------- */
+/* Specialty detail                                                           */
+/* -------------------------------------------------------------------------- */
 
 interface SpecialtyDetailProps {
   specialty: SpecialtyDefinition;
@@ -53,11 +108,11 @@ export function SpecialtyDetail({
     );
 
   return (
-    <section className="relative overflow-hidden bg-[#f7fafb] pb-24 pt-[132px] sm:pt-[142px] lg:pb-32 lg:pt-[152px]">
+    <div className="relative isolate overflow-hidden bg-[#f7fafb] pb-16 pt-[124px] sm:pb-20 sm:pt-[136px] lg:pb-28 lg:pt-[152px]">
       <PageBackground />
 
       <Container width="wide">
-        <div className="relative">
+        <div className="relative min-w-0">
           <Hero specialty={specialty} icon={Icon} />
 
           <Overview specialty={specialty} />
@@ -71,9 +126,13 @@ export function SpecialtyDetail({
           <AssessmentCTA specialty={specialty} />
         </div>
       </Container>
-    </section>
+    </div>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/* Background                                                                 */
+/* -------------------------------------------------------------------------- */
 
 function PageBackground() {
   return (
@@ -81,14 +140,18 @@ function PageBackground() {
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 overflow-hidden"
     >
-      <div className="absolute -left-56 top-16 size-[580px] rounded-full bg-[#15c8bb]/[0.06] blur-[155px]" />
+      <div className="absolute -left-56 top-16 size-[580px] rounded-full bg-[#15c8bb]/[0.05] blur-[155px]" />
 
-      <div className="absolute -right-56 top-32 size-[620px] rounded-full bg-[#4c8dff]/[0.06] blur-[165px]" />
+      <div className="absolute -right-56 top-32 size-[620px] rounded-full bg-[#4c8dff]/[0.05] blur-[165px]" />
 
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(7,23,34,0.019)_1px,transparent_1px),linear-gradient(90deg,rgba(7,23,34,0.019)_1px,transparent_1px)] bg-[size:68px_68px] opacity-45 [mask-image:radial-gradient(circle_at_top,black,transparent_82%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(7,23,34,0.019)_1px,transparent_1px),linear-gradient(90deg,rgba(7,23,34,0.019)_1px,transparent_1px)] bg-[size:68px_68px] opacity-40 [mask-image:radial-gradient(circle_at_top,black,transparent_82%)]" />
     </div>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/* Hero                                                                       */
+/* -------------------------------------------------------------------------- */
 
 function Hero({
   specialty,
@@ -98,51 +161,93 @@ function Hero({
   icon: LucideIcon;
 }) {
   return (
-    <section>
-      <Link
-        href="/specialties"
-        className="group inline-flex items-center gap-2 text-[11px] font-semibold text-[#71858e] transition-colors hover:text-[#17343f]"
-      >
-        <ArrowLeft
-          className="size-3.5 transition-transform duration-300 group-hover:-translate-x-1"
-          strokeWidth={1.8}
-        />
-        All Specialties
-      </Link>
+    <section aria-labelledby="specialty-page-title">
+      <nav aria-label="Breadcrumb">
+        <ol className="flex flex-wrap items-center gap-x-2 gap-y-2 text-sm leading-6 text-[#526b77]">
+          <li>
+            <Link
+              href={siteConfig.routes.home}
+              className={`rounded-sm transition-colors hover:text-[#075e63] ${focusRing}`}
+            >
+              Home
+            </Link>
+          </li>
 
-      <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_0.72fr] lg:items-center">
-        <div>
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-black/[0.07] bg-white/75 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-[#35515c] shadow-[inset_0_1px_rgba(255,255,255,0.9)] backdrop-blur-xl">
-            <Icon
-              className="size-3.5 text-[#0b958b]"
+          <li aria-hidden="true">
+            <ChevronRight
+              className="size-3.5"
               strokeWidth={1.8}
             />
-            {specialty.category}
+          </li>
+
+          <li>
+            <Link
+              href="/specialties"
+              className={`rounded-sm transition-colors hover:text-[#075e63] ${focusRing}`}
+            >
+              Specialties
+            </Link>
+          </li>
+
+          <li aria-hidden="true">
+            <ChevronRight
+              className="size-3.5"
+              strokeWidth={1.8}
+            />
+          </li>
+
+          <li className="min-w-0 font-medium text-[#17343f]">
+            <span aria-current="page">
+              {specialty.shortTitle}
+            </span>
+          </li>
+        </ol>
+      </nav>
+
+      <div className="mt-8 grid min-w-0 gap-10 lg:mt-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-center lg:gap-12 xl:gap-16">
+        <div className="min-w-0">
+          <div className="inline-flex max-w-full items-center gap-2.5 rounded-full border border-[#17343f]/10 bg-white/90 px-3.5 py-2 text-xs font-bold uppercase leading-5 tracking-[0.12em] text-[#31505d] shadow-sm">
+            <Icon
+              aria-hidden="true"
+              className="size-4 shrink-0 text-[#0b7775]"
+              strokeWidth={1.8}
+            />
+
+            <span>{specialty.category}</span>
           </div>
 
-          <h1 className="mt-6 max-w-[900px] text-[clamp(3rem,5.5vw,6rem)] font-semibold leading-[0.95] tracking-[-0.065em] text-[#071722]">
+          <h1
+            id="specialty-page-title"
+            className="mt-6 max-w-[900px] text-[clamp(2.25rem,5vw,5rem)] font-semibold leading-[1.06] tracking-[-0.05em] text-[#071722] [overflow-wrap:break-word]"
+          >
             {specialty.title}
           </h1>
 
-          <p className="mt-6 max-w-[760px] text-[16px] leading-8 text-[#627781]">
+          <p
+            className={`mt-6 max-w-[680px] ${bodyText}`}
+          >
             {specialty.heroDescription}
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link
               href={siteConfig.routes.assessment}
-              className="group inline-flex min-h-[54px] items-center justify-center gap-2.5 rounded-[15px] bg-[#071c27] px-6 text-[13px] font-semibold !text-white shadow-[0_16px_42px_rgba(5,28,38,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_54px_rgba(5,28,38,0.24)]"
+              className={primaryAction}
             >
-              Request an RCM Assessment
+              <span className="!text-white">
+                Request an RCM Assessment
+              </span>
+
               <ArrowRight
-                className="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                aria-hidden="true"
+                className="size-4 shrink-0 !text-white transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none"
                 strokeWidth={1.8}
               />
             </Link>
 
             <Link
               href={siteConfig.routes.contact}
-              className="inline-flex min-h-[54px] items-center justify-center rounded-[15px] border border-black/[0.075] bg-white/75 px-6 text-[13px] font-semibold text-[#23414c] backdrop-blur-xl transition-all hover:bg-white"
+              className={secondaryAction}
             >
               Talk to Our Team
             </Link>
@@ -155,6 +260,10 @@ function Hero({
   );
 }
 
+/* -------------------------------------------------------------------------- */
+/* Specialty workflow panel                                                   */
+/* -------------------------------------------------------------------------- */
+
 function HeroPanel({
   specialty,
   icon: Icon,
@@ -163,63 +272,84 @@ function HeroPanel({
   icon: LucideIcon;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-[28px] border border-[#0c2934] bg-[#071722] p-6 text-white shadow-[0_32px_90px_rgba(7,23,34,0.15)] sm:p-7">
-      <div className="absolute -right-24 -top-24 size-[270px] rounded-full bg-[#4c8dff]/[0.11] blur-[100px]" />
+    <aside
+      aria-label={`${specialty.shortTitle} workflow overview`}
+      className="relative min-w-0 overflow-hidden rounded-[24px] border border-[#17343f] bg-[#071c27] p-5 text-white shadow-[0_24px_70px_rgba(7,23,34,0.12)] sm:rounded-[28px] sm:p-7 lg:p-8"
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-24 -top-24 size-[270px] rounded-full bg-[#4c8dff]/10 blur-[100px]"
+      />
 
-      <div className="absolute -left-24 bottom-[-100px] size-[250px] rounded-full bg-[#15c8bb]/[0.11] blur-[100px]" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-24 bottom-[-100px] size-[250px] rounded-full bg-[#15c8bb]/10 blur-[100px]"
+      />
 
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.023)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.023)_1px,transparent_1px)] bg-[size:52px_52px] opacity-35" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.023)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.023)_1px,transparent_1px)] bg-[size:52px_52px] opacity-35"
+      />
 
       <div className="relative">
-        <div className="flex items-center justify-between gap-4">
-          <span className="flex size-12 items-center justify-center rounded-[15px] border border-[#55e1d6]/12 bg-[#55e1d6]/[0.07] text-[#70e7de]">
-            <Icon className="size-5" strokeWidth={1.7} />
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <span className="flex size-12 items-center justify-center rounded-2xl border border-[#55e1d6]/15 bg-[#55e1d6]/10 text-[#8ce9e1]">
+            <Icon
+              aria-hidden="true"
+              className="size-5"
+              strokeWidth={1.7}
+            />
           </span>
 
-          <span className="rounded-full border border-white/[0.07] bg-white/[0.04] px-3 py-1.5 text-[8px] font-semibold uppercase tracking-[0.12em] text-white/38">
+          <span className="rounded-full border border-white/15 bg-white/[0.05] px-3 py-1.5 text-xs font-semibold tracking-[0.04em] text-white/80">
             Specialty RCM
           </span>
         </div>
 
-        <p className="mt-8 text-[10px] font-bold uppercase tracking-[0.15em] text-[#6de3da]">
+        <p className="mt-8 text-xs font-bold uppercase leading-5 tracking-[0.14em] text-[#8ce9e1]">
           Workflow Focus
         </p>
 
-        <h2 className="mt-3 text-[26px] font-semibold leading-[1.05] tracking-[-0.045em]">
+        <h2 className="mt-3 text-[clamp(1.65rem,2.4vw,2.25rem)] font-semibold leading-[1.15] tracking-[-0.04em] !text-white">
           Specialty context.
-          <span className="block text-white/45">
+          <span className="mt-1 block !text-white/80">
             Connected operations.
           </span>
         </h2>
 
-        <div className="mt-7 space-y-2.5">
+        <ul className="mt-7 space-y-2.5">
           {specialty.focusAreas.map((area) => (
-            <div
+            <li
               key={area.title}
-              className="flex items-center gap-3 rounded-[14px] border border-white/[0.055] bg-white/[0.03] px-3.5 py-3"
+              className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5"
             >
-              <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-[#45ddd1]/[0.08] text-[#67e4db]">
-                <BadgeCheck
-                  className="size-3.5"
+              <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-xl bg-[#45ddd1]/10 text-[#8ce9e1]">
+                <Check
+                  aria-hidden="true"
+                  className="size-4"
                   strokeWidth={1.8}
                 />
               </span>
 
-              <span className="text-[11px] font-medium text-white/58">
+              <span className="min-w-0 text-sm font-medium leading-6 !text-white/85 sm:text-base">
                 {area.title}
               </span>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
 
-        <p className="mt-5 text-[10px] leading-5 text-white/30">
+        <p className="mt-6 border-t border-white/10 pt-5 text-sm leading-6 !text-white/70">
           Service scope and personnel requirements are
           confirmed during discovery.
         </p>
       </div>
-    </div>
+    </aside>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/* Overview                                                                   */
+/* -------------------------------------------------------------------------- */
 
 function Overview({
   specialty,
@@ -227,19 +357,26 @@ function Overview({
   specialty: SpecialtyDefinition;
 }) {
   return (
-    <section className="mt-20 border-y border-black/[0.065] py-14 lg:mt-24 lg:py-16">
-      <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
+    <section
+      id="specialty-overview"
+      aria-labelledby="specialty-overview-title"
+      className="mt-16 border-y border-[#17343f]/10 py-12 sm:mt-20 sm:py-14 lg:mt-24 lg:py-16"
+    >
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)] lg:gap-12">
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#0b9188]">
+          <p className={eyebrow}>
             Specialty Overview
           </p>
 
-          <h2 className="mt-3 max-w-[430px] text-[clamp(2.1rem,3.2vw,3.6rem)] font-semibold leading-[1] tracking-[-0.055em] text-[#0b2732]">
+          <h2
+            id="specialty-overview-title"
+            className={`mt-4 max-w-[480px] ${sectionTitle}`}
+          >
             Built around the practice.
           </h2>
         </div>
 
-        <p className="max-w-[850px] text-[15px] leading-8 text-[#657a84]">
+        <p className={`max-w-[850px] ${bodyText}`}>
           {specialty.overview}
         </p>
       </div>
@@ -247,153 +384,162 @@ function Overview({
   );
 }
 
+/* -------------------------------------------------------------------------- */
+/* Focus areas                                                                */
+/* -------------------------------------------------------------------------- */
+
 function FocusAreas({
   specialty,
 }: {
   specialty: SpecialtyDefinition;
 }) {
   return (
-    <section className="mt-20 lg:mt-24">
-      <div className="grid gap-7 lg:grid-cols-[0.65fr_1.35fr]">
+    <section
+      id="specialty-focus-areas"
+      aria-labelledby="specialty-focus-title"
+      className="mt-16 sm:mt-20 lg:mt-24"
+    >
+      <div className="grid min-w-0 gap-8 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-12">
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#0b9188]">
+          <p className={eyebrow}>
             Revenue Cycle Focus
           </p>
 
-          <h2 className="mt-4 text-[clamp(2.3rem,3.8vw,4.2rem)] font-semibold leading-[0.98] tracking-[-0.058em] text-[#0b2732]">
+          <h2
+            id="specialty-focus-title"
+            className={`mt-4 max-w-[540px] ${sectionTitle}`}
+          >
             Where workflows
-            <span className="block text-[#71858e]">
+            <span className="block text-[#526b77]">
               need attention.
             </span>
           </h2>
 
-          <p className="mt-5 max-w-[430px] text-[13px] leading-7 text-[#748891]">
-            The operating scope is configured around
-            the practice&apos;s actual services, payer
-            requirements, systems and available
-            expertise.
+          <p className="mt-5 max-w-[480px] text-base leading-7 text-[#405966]">
+            The operating scope is configured around the
+            practice&apos;s actual services, payer
+            requirements, systems and available expertise.
           </p>
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-2">
+        <ul className="grid min-w-0 gap-4 sm:grid-cols-2">
           {specialty.focusAreas.map((area, index) => (
-            <div
+            <li
               key={area.title}
-              className="relative min-h-[210px] overflow-hidden rounded-[21px] border border-black/[0.065] bg-white/80 p-5 shadow-[0_14px_42px_rgba(7,23,34,0.03)] backdrop-blur-xl sm:p-6"
+              className="min-w-0"
             >
-              <div className="absolute -right-14 -top-14 size-[150px] rounded-full bg-[#15c8bb]/[0.05] blur-[70px]" />
+              <article className="relative flex h-full flex-col overflow-hidden rounded-[22px] border border-[#17343f]/10 bg-white p-5 shadow-[0_12px_36px_rgba(7,23,34,0.035)] sm:p-6">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-14 -top-14 size-[150px] rounded-full bg-[#15c8bb]/[0.05] blur-[70px]"
+                />
 
-              <div className="relative">
-                <div className="flex items-center justify-between">
-                  <span className="flex size-8 items-center justify-center rounded-xl bg-[#15c8bb]/[0.065] text-[9px] font-bold text-[#0a958a]">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+                <div className="relative">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="flex size-10 items-center justify-center rounded-xl bg-[#e8f7f5] text-sm font-bold text-[#0b716e]">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
 
-                  <BadgeCheck
-                    className="size-4 text-[#0c9b90]"
-                    strokeWidth={1.7}
-                  />
+                    <Check
+                      aria-hidden="true"
+                      className="size-5 text-[#0b7775]"
+                      strokeWidth={1.8}
+                    />
+                  </div>
+
+                  <h3 className="mt-6 text-lg font-semibold leading-snug tracking-[-0.025em] text-[#17343f]">
+                    {area.title}
+                  </h3>
+
+                  <p className="mt-3 text-base leading-7 text-[#405966]">
+                    {area.description}
+                  </p>
                 </div>
-
-                <h3 className="mt-7 text-[16px] font-semibold tracking-[-0.025em] text-[#17343f]">
-                  {area.title}
-                </h3>
-
-                <p className="mt-3 text-[11px] leading-6 text-[#748891]">
-                  {area.description}
-                </p>
-              </div>
-            </div>
+              </article>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
 }
 
+/* -------------------------------------------------------------------------- */
+/* Operating approach                                                         */
+/* -------------------------------------------------------------------------- */
+
 function OperatingApproach() {
-  const steps = [
-    {
-      number: "01",
-      title: "Understand",
-      description:
-        "Review the specialty, practice systems, payer mix and current revenue-cycle challenges.",
-    },
-    {
-      number: "02",
-      title: "Define",
-      description:
-        "Agree on service scope, responsibilities, access requirements and escalation procedures.",
-    },
-    {
-      number: "03",
-      title: "Coordinate",
-      description:
-        "Establish the administrative workflows and handoffs required for the engagement.",
-    },
-    {
-      number: "04",
-      title: "Review",
-      description:
-        "Use agreed reporting and operational reviews to identify unresolved issues and improvement opportunities.",
-    },
-  ];
-
   return (
-    <section className="mt-20 lg:mt-24">
-      <div className="relative overflow-hidden rounded-[28px] border border-[#0c2934] bg-[#071722] p-6 text-white shadow-[0_30px_90px_rgba(7,23,34,0.14)] sm:p-8 lg:p-10">
-        <div className="absolute -left-24 -top-20 size-[280px] rounded-full bg-[#19cabb]/[0.11] blur-[105px]" />
+    <section
+      id="specialty-operating-approach"
+      aria-labelledby="specialty-approach-title"
+      className="mt-16 sm:mt-20 lg:mt-24"
+    >
+      <div className="relative overflow-hidden rounded-[24px] border border-[#17343f] bg-[#071c27] p-5 text-white shadow-[0_24px_70px_rgba(7,23,34,0.12)] sm:rounded-[28px] sm:p-8 lg:p-10">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-24 -top-20 size-[280px] rounded-full bg-[#19cabb]/10 blur-[105px]"
+        />
 
-        <div className="absolute -right-24 bottom-[-100px] size-[320px] rounded-full bg-[#4c8dff]/[0.09] blur-[115px]" />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-24 bottom-[-100px] size-[320px] rounded-full bg-[#4c8dff]/[0.08] blur-[115px]"
+        />
 
         <div className="relative">
-          <div className="grid gap-7 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end lg:gap-12">
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#6fe5dc]">
+              <p className="text-xs font-bold uppercase leading-5 tracking-[0.14em] text-[#8ce9e1]">
                 Operating Approach
               </p>
 
-              <h2 className="mt-4 text-[clamp(2.4rem,4vw,4.4rem)] font-semibold leading-[0.98] tracking-[-0.06em]">
+              <h2
+                id="specialty-approach-title"
+                className="mt-4 text-[clamp(2rem,3.7vw,3.8rem)] font-semibold leading-[1.12] tracking-[-0.045em] !text-white"
+              >
                 Defined around
-                <span className="block text-white/45">
+                <span className="block !text-white/80">
                   your workflow.
                 </span>
               </h2>
             </div>
 
-            <p className="max-w-[570px] text-[13px] leading-7 text-white/43 lg:justify-self-end">
-              We begin by understanding the
-              practice&apos;s requirements before
-              defining the appropriate service scope
-              and operating responsibilities.
+            <p className="max-w-[570px] text-base leading-7 !text-white/80 lg:justify-self-end">
+              We begin by understanding the practice&apos;s
+              requirements before defining the appropriate
+              service scope and operating responsibilities.
             </p>
           </div>
 
-          <div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((step) => (
-              <div
+          <ol className="mt-8 grid gap-4 sm:grid-cols-2 xl:mt-10 xl:grid-cols-4">
+            {operatingSteps.map((step) => (
+              <li
                 key={step.number}
-                className="rounded-[19px] border border-white/[0.07] bg-white/[0.035] p-5 backdrop-blur-xl"
+                className="min-w-0 rounded-[20px] border border-white/10 bg-white/[0.045] p-5 sm:p-6"
               >
-                <span className="flex size-8 items-center justify-center rounded-xl border border-[#4ee1d5]/12 bg-[#4ee1d5]/[0.07] text-[9px] font-bold text-[#6de7dd]">
+                <span className="flex size-10 items-center justify-center rounded-xl border border-[#4ee1d5]/15 bg-[#4ee1d5]/10 text-sm font-bold text-[#8ce9e1]">
                   {step.number}
                 </span>
 
-                <h3 className="mt-7 text-[14px] font-semibold text-white/82">
+                <h3 className="mt-6 text-lg font-semibold !text-white">
                   {step.title}
                 </h3>
 
-                <p className="mt-2 text-[10px] leading-5 text-white/40">
+                <p className="mt-3 text-base leading-7 !text-white/80">
                   {step.description}
                 </p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </div>
     </section>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/* Related services                                                           */
+/* -------------------------------------------------------------------------- */
 
 function RelatedServices({
   services,
@@ -403,61 +549,93 @@ function RelatedServices({
   if (services.length === 0) return null;
 
   return (
-    <section className="mt-20 lg:mt-24">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <section
+      id="specialty-related-services"
+      aria-labelledby="specialty-related-title"
+      className="mt-16 sm:mt-20 lg:mt-24"
+    >
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#0b9188]">
+          <p className={eyebrow}>
             Connected Services
           </p>
 
-          <h2 className="mt-3 text-[clamp(2rem,3vw,3.4rem)] font-semibold tracking-[-0.055em] text-[#0b2732]">
+          <h2
+            id="specialty-related-title"
+            className={`mt-4 ${sectionTitle}`}
+          >
             Explore relevant capabilities.
           </h2>
         </div>
 
         <Link
-          href="/services"
-          className="inline-flex items-center gap-2 text-[11px] font-semibold text-[#58707a]"
+          href={siteConfig.routes.services}
+          className={`group inline-flex min-h-11 w-fit items-center gap-2 rounded-sm text-sm font-semibold text-[#075e63] transition-colors hover:text-[#071c27] ${focusRing}`}
         >
           All services
-          <ArrowRight className="size-3.5" strokeWidth={1.8} />
+
+          <ArrowRight
+            aria-hidden="true"
+            className="size-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none"
+            strokeWidth={1.8}
+          />
         </Link>
       </div>
 
-      <div className="mt-7 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+      <ul className="mt-7 grid min-w-0 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {services.map((service) => (
-          <Link
+          <li
             key={service.slug}
-            href={`/services/${service.slug}`}
-            className="group flex flex-col rounded-[20px] border border-black/[0.065] bg-white/75 p-5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-[#15c8bb]/20 hover:bg-white"
+            className="min-w-0"
           >
-            <div className="flex items-center justify-between">
-              <span className="flex size-10 items-center justify-center rounded-[13px] bg-[#15c8bb]/[0.06] text-[#0b958a]">
-                <BadgeCheck
-                  className="size-[17px]"
-                  strokeWidth={1.7}
+            <Link
+              href={`/services/${service.slug}`}
+              className={`group flex h-full min-w-0 flex-col rounded-[22px] border border-[#17343f]/10 bg-white p-5 shadow-[0_10px_30px_rgba(7,23,34,0.025)] transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-[#0b7775]/30 hover:shadow-[0_16px_40px_rgba(7,23,34,0.06)] sm:p-6 motion-reduce:transform-none motion-reduce:transition-none ${focusRing}`}
+            >
+              <span className="flex items-center justify-between gap-3">
+                <span className="flex size-11 items-center justify-center rounded-2xl bg-[#e8f7f5] text-[#0b7775]">
+                  <Check
+                    aria-hidden="true"
+                    className="size-5"
+                    strokeWidth={1.8}
+                  />
+                </span>
+
+                <ArrowRight
+                  aria-hidden="true"
+                  className="size-4 shrink-0 text-[#526b77] transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none"
+                  strokeWidth={1.8}
                 />
               </span>
 
-              <ArrowRight
-                className="size-4 text-[#91a1a8] transition-transform duration-300 group-hover:translate-x-1"
-                strokeWidth={1.7}
-              />
-            </div>
+              <h3 className="mt-6 text-lg font-semibold leading-snug tracking-[-0.025em] text-[#17343f]">
+                {service.shortTitle}
+              </h3>
 
-            <h3 className="mt-6 text-[15px] font-semibold tracking-[-0.025em] text-[#17343f]">
-              {service.shortTitle}
-            </h3>
+              <p className="mt-3 text-base leading-7 text-[#405966]">
+                {service.description}
+              </p>
 
-            <p className="mt-2 text-[11px] leading-5 text-[#7b8e96]">
-              {service.description}
-            </p>
-          </Link>
+              <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#075e63]">
+                Explore service
+
+                <ArrowRight
+                  aria-hidden="true"
+                  className="size-4 transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none"
+                  strokeWidth={1.8}
+                />
+              </span>
+            </Link>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/* Assessment CTA                                                             */
+/* -------------------------------------------------------------------------- */
 
 function AssessmentCTA({
   specialty,
@@ -465,36 +643,51 @@ function AssessmentCTA({
   specialty: SpecialtyDefinition;
 }) {
   return (
-    <section className="mt-20 text-center lg:mt-24">
+    <section
+      id="specialty-assessment"
+      aria-labelledby="specialty-assessment-title"
+      className="mt-16 border-t border-[#17343f]/10 pt-14 text-center sm:mt-20 sm:pt-16 lg:mt-24"
+    >
       <div className="mx-auto max-w-[760px]">
-        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#0b9188]">
+        <p className={eyebrow}>
           Practice Assessment
         </p>
 
-        <h2 className="mt-4 text-[clamp(2.4rem,4.3vw,4.6rem)] font-semibold leading-[0.98] tracking-[-0.058em] text-[#0a2631]">
+        <h2
+          id="specialty-assessment-title"
+          className="mt-4 text-[clamp(2rem,4vw,4rem)] font-semibold leading-[1.12] tracking-[-0.045em] text-[#0a2631]"
+        >
           Let&apos;s understand
-          <span className="block text-[#71868f]">
+          <span className="block text-[#526b77]">
             your revenue cycle.
           </span>
         </h2>
 
-        <p className="mx-auto mt-5 max-w-[620px] text-[14px] leading-7 text-[#71858e]">
-          Share your current billing model and
-          challenges in {specialty.shortTitle.toLowerCase()}.
-          We can then discuss which RCM workflows may
-          benefit from additional support.
+        <p
+          className={`mx-auto mt-5 max-w-[620px] ${bodyText}`}
+        >
+          Share your current billing model and challenges in{" "}
+          {specialty.shortTitle.toLowerCase()}. We can then
+          discuss which RCM workflows may benefit from
+          additional support.
         </p>
 
-        <Link
-          href={siteConfig.routes.assessment}
-          className="group mt-7 inline-flex min-h-[54px] items-center justify-center gap-2.5 rounded-[15px] bg-[#071c27] px-6 text-[13px] font-semibold !text-white shadow-[0_16px_42px_rgba(5,28,38,0.18)] transition-all duration-300 hover:-translate-y-0.5"
-        >
-          Request an RCM Assessment
-          <ArrowRight
-            className="size-4 transition-transform duration-300 group-hover:translate-x-1"
-            strokeWidth={1.8}
-          />
-        </Link>
+        <div className="mt-8 flex justify-center">
+          <Link
+            href={siteConfig.routes.assessment}
+            className={primaryAction}
+          >
+            <span className="!text-white">
+              Request an RCM Assessment
+            </span>
+
+            <ArrowRight
+              aria-hidden="true"
+              className="size-4 shrink-0 !text-white transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none"
+              strokeWidth={1.8}
+            />
+          </Link>
+        </div>
       </div>
     </section>
   );

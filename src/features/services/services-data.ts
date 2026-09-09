@@ -1,3 +1,7 @@
+/* -------------------------------------------------------------------------- */
+/* Types                                                                      */
+/* -------------------------------------------------------------------------- */
+
 export interface ServiceDefinition {
   slug: string;
   title: string;
@@ -19,625 +23,724 @@ export interface ServiceDefinition {
   relatedServices: readonly string[];
 }
 
+/* -------------------------------------------------------------------------- */
+/* Service content                                                            */
+/* -------------------------------------------------------------------------- */
+
 export const services = [
+  /* ------------------------------------------------------------------------ */
+  /* Medical Billing                                                          */
+  /* ------------------------------------------------------------------------ */
+
   {
     slug: "medical-billing",
     title: "Medical Billing Services",
     shortTitle: "Medical Billing",
     category: "Core RCM",
     eyebrow: "Medical Billing",
+
     description:
-      "Structured medical billing support for healthcare practices, from charge entry and claim validation through submission and payer follow-up.",
+      "Medical billing services for healthcare practices, including charge entry, claim validation, submission, rejection management and payer follow-up.",
+
     heroDescription:
-      "Move claims through the revenue cycle with accurate workflows, clear ownership and disciplined follow-through.",
+      "Bring structure to your medical billing process with coordinated claim preparation, submission, rejection management and payer follow-up.",
+
     overview:
-      "Medical billing is more than submitting claims. It requires coordination between patient information, clinical documentation, coding, payer requirements and payment workflows. claryden rcm supports practices with structured billing operations designed to reduce avoidable rework and keep claims moving toward resolution.",
+      "Medical billing involves more than submitting claims. It requires coordination between patient information, clinical documentation, coding, payer requirements and payment workflows. Claryden RCM supports healthcare practices with structured administrative billing operations, from charge entry and claim validation through submission and unresolved claim follow-up. The engagement is configured around the practice's specialty, approved systems, payer mix and existing responsibilities. Billing-related documentation and coding questions are coordinated with appropriately qualified personnel, while agreed quality checks and reporting help the practice maintain visibility into its revenue-cycle activity.",
+
     highlights: [
       "Charge entry and claim preparation",
       "Claim validation and submission",
       "Clearinghouse rejection management",
       "Payer follow-up coordination",
     ],
+
     deliverables: [
       {
         title: "Charge Entry",
         description:
-          "Prepare charges using the information and documentation supplied through the practice's approved workflow.",
+          "Prepare charges using approved encounter information, documented services and the practice's established billing workflow.",
       },
       {
         title: "Claim Validation",
         description:
-          "Review claims for required information and applicable billing edits before submission.",
+          "Review claims for required demographic, insurance, billing and other applicable information before submission.",
       },
       {
         title: "Claim Submission",
         description:
-          "Submit claims through the agreed practice management system and clearinghouse workflow.",
+          "Submit claims through the agreed practice management system and clearinghouse workflow, with submission activity recorded as required.",
       },
       {
         title: "Rejection Management",
         description:
-          "Identify and correct clearinghouse or payer-front-end rejections and coordinate resubmission.",
+          "Identify clearinghouse or payer-front-end rejections, investigate the stated issues and coordinate corrections and resubmission.",
       },
       {
         title: "Billing Follow-Up",
         description:
-          "Track unresolved claims and coordinate the next required action with the appropriate team.",
+          "Track unresolved claims, review available claim-status information and coordinate the next required action with the appropriate team.",
       },
       {
         title: "Operational Reporting",
         description:
-          "Provide visibility into billing activity, outstanding issues and agreed performance indicators.",
+          "Provide agreed visibility into billing activity, rejected claims, outstanding issues and relevant operational performance indicators.",
       },
     ],
+
     process: [
       {
         title: "Review",
         description:
-          "Understand the practice's billing system, specialty, payer mix and existing workflows.",
+          "Understand the practice's specialty, billing system, payer mix, existing workflows and current operational challenges.",
       },
       {
         title: "Configure",
         description:
-          "Establish responsibilities, access, billing rules and escalation procedures.",
+          "Define responsibilities, approved system access, billing procedures, quality checks and escalation requirements.",
       },
       {
         title: "Operate",
         description:
-          "Execute the agreed billing workflow with quality checks and defined ownership.",
+          "Execute the agreed billing workflow with documented ownership, appropriate quality controls and coordinated follow-up.",
       },
       {
         title: "Improve",
         description:
-          "Review recurring issues and reporting to identify opportunities for operational improvement.",
+          "Review recurring issues and agreed reporting to identify opportunities for workflow refinement and reduced avoidable rework.",
       },
     ],
+
     relatedServices: [
       "denial-management",
       "ar-management",
       "payment-posting",
     ],
   },
+
+  /* ------------------------------------------------------------------------ */
+  /* Accounts Receivable Management                                          */
+  /* ------------------------------------------------------------------------ */
+
   {
     slug: "ar-management",
     title: "Accounts Receivable Management",
     shortTitle: "A/R Management",
     category: "Revenue Recovery",
     eyebrow: "Accounts Receivable",
+
     description:
-      "Structured insurance A/R follow-up to investigate outstanding claims, prioritize unresolved balances and coordinate payer action.",
+      "Insurance accounts receivable management for healthcare practices, including A/R aging review, outstanding claim investigation, payer follow-up and escalation.",
+
     heroDescription:
-      "Bring ownership, prioritization and consistent follow-up to outstanding insurance receivables.",
+      "Give outstanding insurance receivables a clearer resolution path through structured prioritization, payer follow-up and documented next actions.",
+
     overview:
-      "A/R management requires more than repeatedly checking claim status. Each outstanding account needs an understood reason for non-payment, a documented next action and appropriate follow-up. claryden rcm supports practices with organized A/R workflows that help teams focus on unresolved claims and reimbursement delays.",
+      "Insurance accounts receivable management requires more than repeatedly checking claim status. Outstanding claims may involve payer processing delays, denials, missing information, payment discrepancies or other unresolved issues. Claryden RCM supports practices with structured A/R workflows that help identify the reason an account remains open, prioritize follow-up and coordinate the appropriate next action. Work is organized around agreed aging, balance, payer and time-sensitive criteria, with account activity and unresolved issues documented through approved systems. Historical receivables may require a separate assessment and recovery approach based on their age, available documentation and applicable payer requirements.",
+
     highlights: [
       "Insurance A/R aging review",
       "Payer claim-status follow-up",
       "Outstanding balance investigation",
       "Escalation and resolution tracking",
     ],
+
     deliverables: [
       {
         title: "A/R Aging Review",
         description:
-          "Review outstanding insurance receivables using agreed aging, balance and priority criteria.",
+          "Review outstanding insurance receivables using agreed aging, balance, payer and priority criteria to organize follow-up activity.",
       },
       {
         title: "Payer Follow-Up",
         description:
-          "Contact payers or use approved payer channels to investigate unresolved claims.",
+          "Use approved payer portals, communication channels or practice systems to investigate unresolved claims and obtain available status information.",
       },
       {
         title: "Account Resolution",
         description:
-          "Identify the reason for non-payment and coordinate corrections, documentation or other required actions.",
+          "Identify available reasons for non-payment and coordinate corrections, documentation, appeals or other appropriate resolution actions.",
       },
       {
         title: "Escalation Management",
         description:
-          "Track accounts requiring provider, payer or management intervention.",
+          "Track accounts requiring provider, payer or management intervention and communicate the information needed for the next decision.",
       },
       {
         title: "Old A/R Support",
         description:
-          "Review historical receivables and define a separate recovery approach where appropriate.",
+          "Assess historical receivables and define a separate follow-up approach where appropriate, considering account age, documentation and applicable payer deadlines.",
       },
       {
         title: "A/R Reporting",
         description:
-          "Report on aging, follow-up activity, unresolved categories and agreed recovery indicators.",
+          "Report on aging, follow-up activity, unresolved account categories and agreed recovery indicators to support operational review.",
       },
     ],
+
     process: [
       {
         title: "Assess",
         description:
-          "Review the available A/R inventory, aging and existing follow-up process.",
+          "Review the available A/R inventory, aging distribution, payer mix and existing account follow-up procedures.",
       },
       {
         title: "Prioritize",
         description:
-          "Segment accounts using agreed criteria such as aging, balance, payer and timely-filing risk.",
+          "Segment accounts using agreed criteria such as aging, balance, payer, denial status and applicable filing or appeal deadlines.",
       },
       {
         title: "Work",
         description:
-          "Investigate outstanding claims and document the required next action.",
+          "Investigate outstanding claims, document findings and coordinate the appropriate next action or escalation.",
       },
       {
         title: "Report",
         description:
-          "Review account movement, unresolved issues and opportunities to improve the follow-up process.",
+          "Review account movement, unresolved issues and recurring patterns to identify opportunities for more effective follow-up.",
       },
     ],
+
     relatedServices: [
       "denial-management",
       "medical-billing",
       "payment-posting",
     ],
   },
+
+  /* ------------------------------------------------------------------------ */
+  /* Denial Management                                                        */
+  /* ------------------------------------------------------------------------ */
+
   {
     slug: "denial-management",
     title: "Denial Management Services",
     shortTitle: "Denial Management",
     category: "Revenue Recovery",
     eyebrow: "Denial Management",
+
     description:
-      "Investigate denied claims, identify root causes and coordinate corrections, appeals and prevention workflows.",
+      "Medical claim denial management services, including denial investigation, root-cause analysis, correction and appeal coordination, and recurring-denial reporting.",
+
     heroDescription:
-      "Turn denied claims into organized resolution workflows with clear reasons, ownership and next actions.",
+      "Move denied claims into organized resolution workflows with clear reasons, defined ownership and coordinated corrective action.",
+
     overview:
-      "Denials can arise from eligibility, authorization, coding, documentation, payer rules and other issues. Effective denial management requires understanding the reason for the denial and selecting the appropriate response. claryden rcm supports structured denial workflows that connect investigation, correction, appeal coordination and recurring-issue analysis.",
+      "Medical claim denials can arise from eligibility, authorization, coding, documentation, payer policy and other billing-related issues. Effective denial management begins with understanding the payer's stated reason for non-payment and determining the appropriate response. Claryden RCM supports structured administrative workflows for denial identification, investigation, correction, appeal coordination and follow-up. Applicable payer deadlines and documentation requirements are considered throughout the process, while clinical and coding questions are directed to appropriately qualified personnel. Recurring denial patterns can also be reviewed with the practice to identify opportunities for workflow improvement and prevention.",
+
     highlights: [
       "Denial identification and categorization",
       "Root-cause investigation",
       "Correction and appeal coordination",
       "Recurring-denial analysis",
     ],
+
     deliverables: [
       {
         title: "Denial Review",
         description:
-          "Review payer denial information and identify the stated reason for non-payment.",
+          "Review payer denial information, adjustment details and available claim history to identify the stated reason for non-payment.",
       },
       {
         title: "Root-Cause Analysis",
         description:
-          "Investigate relevant billing, documentation, eligibility or authorization issues.",
+          "Investigate relevant eligibility, authorization, billing, documentation or coding-related issues and coordinate clarification where required.",
       },
       {
         title: "Correction & Resubmission",
         description:
-          "Coordinate corrected claims when appropriate under payer requirements.",
+          "Coordinate corrected claims or other appropriate billing actions in accordance with applicable payer requirements.",
       },
       {
         title: "Appeal Coordination",
         description:
-          "Prepare and coordinate appeals within the agreed scope, using supporting information supplied through approved workflows.",
+          "Prepare and coordinate administrative appeals within the agreed scope using supporting information supplied through approved workflows.",
       },
       {
         title: "Deadline Tracking",
         description:
-          "Track applicable payer reconsideration, appeal and timely-filing requirements.",
+          "Track applicable payer reconsideration, appeal and timely-filing requirements and escalate time-sensitive issues as appropriate.",
       },
       {
         title: "Denial Reporting",
         description:
-          "Identify recurring denial categories and communicate opportunities for prevention.",
+          "Organize recurring denial categories and communicate findings that may help the practice review preventable workflow issues.",
       },
     ],
+
     process: [
       {
         title: "Identify",
         description:
-          "Capture the denial reason and relevant payer information.",
+          "Capture the payer's denial reason, relevant claim information and available supporting details.",
       },
       {
         title: "Investigate",
         description:
-          "Determine the underlying issue and appropriate resolution path.",
+          "Review the underlying issue, applicable payer requirements and available resolution options.",
       },
       {
         title: "Resolve",
         description:
-          "Coordinate correction, appeal or other payer action as applicable.",
+          "Coordinate the appropriate correction, appeal, documentation request or other payer action within the agreed scope.",
       },
       {
         title: "Prevent",
         description:
-          "Review recurring patterns and recommend workflow improvements.",
+          "Review recurring denial patterns and communicate opportunities for process refinement and improved coordination.",
       },
     ],
+
     relatedServices: [
       "ar-management",
       "medical-billing",
       "eligibility-verification",
     ],
   },
+
+  /* ------------------------------------------------------------------------ */
+  /* Payment Posting                                                          */
+  /* ------------------------------------------------------------------------ */
+
   {
     slug: "payment-posting",
     title: "Payment Posting Services",
     shortTitle: "Payment Posting",
     category: "Payment Operations",
     eyebrow: "Payment Posting",
+
     description:
-      "Accurate posting support for insurance payments, adjustments and patient responsibility using approved ERA and EOB workflows.",
+      "Medical payment posting services for insurance remittances, ERA and EOB processing, adjustments, patient responsibility and reconciliation support.",
+
     heroDescription:
-      "Keep payment records accurate, adjustments visible and unresolved balances ready for the next action.",
+      "Keep payment records organized with accurate remittance posting, visible adjustments and timely identification of unresolved balances.",
+
     overview:
-      "Payment posting connects payer adjudication with the practice's financial records. Accurate posting helps identify remaining patient responsibility, contractual adjustments, denials and unresolved balances. claryden rcm supports payment workflows with attention to accuracy, reconciliation and timely identification of exceptions.",
+      "Payment posting connects payer adjudication with the practice's financial records. Insurance remittances may include payments, contractual adjustments, patient responsibility, denials and other information that affects the remaining account balance. Claryden RCM supports payment posting through approved ERA, EOB and practice management workflows, with attention to accurate allocation, appropriate adjustments and exception identification. Unmatched payments, posting discrepancies and unresolved balances are coordinated through the agreed review process. Reconciliation responsibilities and financial controls are defined with the practice, while payment handling and access remain subject to its approved procedures.",
+
     highlights: [
       "ERA and EOB posting",
       "Insurance payment allocation",
       "Adjustment and patient responsibility posting",
       "Payment exception identification",
     ],
+
     deliverables: [
       {
         title: "ERA / EOB Processing",
         description:
-          "Process electronic or approved manual remittance information through the practice's system.",
+          "Process electronic remittance advice or approved manual explanation-of-benefits information through the practice's established systems.",
       },
       {
         title: "Payment Allocation",
         description:
-          "Post insurance payments to the appropriate accounts and claims.",
+          "Post insurance payments to the appropriate claims and accounts using available remittance information and approved procedures.",
       },
       {
         title: "Adjustment Posting",
         description:
-          "Apply contractual and other approved adjustments according to payer and practice rules.",
+          "Apply contractual and other approved adjustments according to payer adjudication details and the practice's posting rules.",
       },
       {
         title: "Patient Responsibility",
         description:
-          "Record deductible, copay, coinsurance and other patient responsibility as indicated by adjudication.",
+          "Record deductible, copay, coinsurance and other patient responsibility amounts as indicated by the available adjudication information.",
       },
       {
         title: "Exception Review",
         description:
-          "Identify posting discrepancies, unmatched payments or unresolved remittance items.",
+          "Identify unmatched payments, posting discrepancies, denials or unresolved remittance items requiring additional investigation.",
       },
       {
         title: "Reconciliation Support",
         description:
-          "Support agreed reconciliation procedures and communicate outstanding discrepancies.",
+          "Support agreed reconciliation procedures and communicate outstanding discrepancies to the appropriate practice or financial team.",
       },
     ],
+
     process: [
       {
         title: "Receive",
         description:
-          "Access remittance information through approved practice workflows.",
+          "Access remittance information through approved practice systems and established administrative workflows.",
       },
       {
         title: "Post",
         description:
-          "Apply payments and adjustments according to the relevant remittance details.",
+          "Apply payments, adjustments and patient responsibility according to the relevant remittance details and practice rules.",
       },
       {
         title: "Review",
         description:
-          "Identify exceptions, denials and remaining balances requiring action.",
+          "Identify posting exceptions, denials and remaining balances that require additional action.",
       },
       {
         title: "Reconcile",
         description:
-          "Support the practice's agreed reconciliation and reporting procedures.",
+          "Support the practice's agreed reconciliation, exception-resolution and reporting procedures.",
       },
     ],
+
     relatedServices: [
       "medical-billing",
       "ar-management",
       "denial-management",
     ],
   },
+
+  /* ------------------------------------------------------------------------ */
+  /* Eligibility Verification                                                 */
+  /* ------------------------------------------------------------------------ */
+
   {
     slug: "eligibility-verification",
     title: "Eligibility Verification Services",
     shortTitle: "Eligibility Verification",
     category: "Front-End RCM",
     eyebrow: "Patient Access",
+
     description:
-      "Insurance eligibility and benefits verification support to help practices identify coverage and patient responsibility before services are delivered.",
+      "Insurance eligibility and benefits verification services, including coverage review, patient responsibility information and front-end exception coordination.",
+
     heroDescription:
-      "Start the revenue cycle with clearer coverage information and fewer avoidable front-end surprises.",
+      "Start the revenue cycle with clearer coverage information, coordinated benefits review and timely communication of verification issues.",
+
     overview:
-      "Eligibility and benefits verification helps practices understand whether coverage is active and what information may affect reimbursement or patient responsibility. claryden rcm supports approved verification workflows and communicates findings to the practice so appropriate action can be taken before the encounter.",
+      "Insurance eligibility and benefits verification helps healthcare practices identify available coverage information before scheduled services. Depending on the payer, plan and service, the process may involve checking active coverage, relevant benefits, patient responsibility and additional administrative requirements. Claryden RCM supports approved verification workflows and communicates findings that require practice or patient follow-up. Verification is based on information available through the applicable payer or practice systems and does not guarantee coverage, authorization or payment. The scope of review is defined around the practice's services, scheduling process and payer requirements.",
+
     highlights: [
       "Coverage status verification",
       "Benefits and patient responsibility review",
       "Payer information validation",
       "Verification exception coordination",
     ],
+
     deliverables: [
       {
         title: "Coverage Verification",
         description:
-          "Check insurance eligibility through approved payer or practice systems.",
+          "Check available insurance eligibility information through approved payer portals, clearinghouse tools or practice systems.",
       },
       {
         title: "Benefits Review",
         description:
-          "Review available benefit information relevant to the scheduled service.",
+          "Review available benefit information relevant to the scheduled service and identify requirements that may need additional clarification.",
       },
       {
         title: "Patient Responsibility",
         description:
-          "Identify available copay, deductible and coinsurance information.",
+          "Identify available copay, deductible, coinsurance and other relevant patient responsibility information for practice review.",
       },
       {
         title: "Coverage Exceptions",
         description:
-          "Flag inactive coverage, mismatched information or other verification issues.",
+          "Flag inactive coverage, mismatched information, missing details or other verification issues requiring follow-up.",
       },
       {
         title: "Practice Coordination",
         description:
-          "Communicate findings requiring patient or practice follow-up.",
+          "Communicate findings that require patient, scheduling, clinical or other practice-team action before the encounter.",
       },
       {
         title: "Verification Tracking",
         description:
-          "Maintain agreed records of verification activity and unresolved exceptions.",
+          "Maintain agreed records of verification activity, available payer responses and unresolved exceptions through approved workflows.",
       },
     ],
+
     process: [
       {
         title: "Receive",
         description:
-          "Receive the scheduled encounter information through approved systems.",
+          "Receive scheduled encounter and insurance information through the practice's approved systems.",
       },
       {
         title: "Verify",
         description:
-          "Check eligibility and relevant benefits with the payer.",
+          "Check available eligibility and relevant benefit information using the applicable payer or approved verification channel.",
       },
       {
         title: "Communicate",
         description:
-          "Flag coverage issues or additional requirements to the practice.",
+          "Flag coverage issues, missing information or additional administrative requirements to the appropriate practice team.",
       },
       {
         title: "Document",
         description:
-          "Record verification findings through the agreed workflow.",
+          "Record verification findings and unresolved exceptions through the agreed administrative workflow.",
       },
     ],
+
     relatedServices: [
       "prior-authorization",
       "medical-billing",
       "denial-management",
     ],
   },
+
+  /* ------------------------------------------------------------------------ */
+  /* Prior Authorization                                                      */
+  /* ------------------------------------------------------------------------ */
+
   {
     slug: "prior-authorization",
     title: "Prior Authorization Support",
     shortTitle: "Prior Authorization",
     category: "Front-End RCM",
     eyebrow: "Prior Authorization",
+
     description:
-      "Administrative prior authorization support to help practices coordinate payer requirements, submissions and authorization status.",
+      "Administrative prior authorization support for healthcare practices, including requirement review, submission coordination, payer follow-up and status tracking.",
+
     heroDescription:
-      "Bring structure and visibility to authorization workflows before services reach the claim stage.",
+      "Bring structure to prior authorization workflows with coordinated requirement checks, administrative submissions and clear status communication.",
+
     overview:
-      "Prior authorization requirements vary by payer, plan and service. Missing or incomplete authorization can create treatment delays and reimbursement issues. claryden rcm supports the administrative authorization process using information supplied by the practice, while clinical decisions and medical-necessity determinations remain with appropriately qualified professionals.",
+      "Prior authorization requirements vary by payer, health plan and service. Practices may need to coordinate coverage information, supporting documentation, submission requirements and payer responses before a planned service. Claryden RCM supports the administrative authorization process using information supplied through approved practice workflows. This may include requirement review, submission coordination, status follow-up and communication of outstanding requests. Clinical decisions, medical-necessity determinations and supporting clinical documentation remain the responsibility of appropriately qualified professionals. Authorization approval and reimbursement are not guaranteed, and the scope of support is established around the practice's actual services and payer requirements.",
+
     highlights: [
       "Authorization requirement checks",
       "Administrative submission support",
       "Payer status follow-up",
       "Authorization tracking and escalation",
     ],
+
     deliverables: [
       {
         title: "Requirement Review",
         description:
-          "Check available payer requirements for the relevant service and plan.",
+          "Review available payer and plan requirements to identify whether authorization may be required for the planned service.",
       },
       {
         title: "Submission Coordination",
         description:
-          "Coordinate administrative authorization requests using approved practice information.",
+          "Coordinate administrative authorization requests using approved practice information and supporting materials supplied by the appropriate team.",
       },
       {
         title: "Status Follow-Up",
         description:
-          "Track pending requests and communicate payer updates.",
+          "Track pending requests, review available payer updates and communicate additional information requirements.",
       },
       {
         title: "Documentation Coordination",
         description:
-          "Identify requests for additional documentation and route them to the appropriate practice team.",
+          "Identify requests for additional clinical or administrative documentation and route them to appropriately qualified practice personnel.",
       },
       {
         title: "Authorization Tracking",
         description:
-          "Record reference numbers, statuses, validity dates and other relevant authorization information.",
+          "Record available reference numbers, authorization statuses, validity dates and other relevant information through agreed systems.",
       },
       {
         title: "Escalation Support",
         description:
-          "Flag pending, denied or time-sensitive requests requiring provider or management action.",
+          "Flag pending, denied or time-sensitive requests that require provider, clinical or management review and further action.",
       },
     ],
+
     process: [
       {
         title: "Check",
         description:
-          "Review whether authorization may be required for the planned service.",
+          "Review available payer requirements and determine whether administrative authorization coordination may be needed.",
       },
       {
         title: "Coordinate",
         description:
-          "Prepare and submit administrative information through approved channels.",
+          "Prepare and submit approved administrative information through the appropriate payer or practice channel.",
       },
       {
         title: "Follow Up",
         description:
-          "Track payer status and additional information requests.",
+          "Track payer status, additional information requests and relevant time-sensitive requirements.",
       },
       {
         title: "Communicate",
         description:
-          "Report the outcome and relevant authorization details to the practice.",
+          "Report available outcomes, authorization details and unresolved requirements to the appropriate practice team.",
       },
     ],
+
     relatedServices: [
       "eligibility-verification",
       "medical-billing",
       "denial-management",
     ],
   },
+
+  /* ------------------------------------------------------------------------ */
+  /* Provider Credentialing                                                   */
+  /* ------------------------------------------------------------------------ */
+
   {
     slug: "credentialing",
     title: "Provider Credentialing Services",
     shortTitle: "Credentialing",
     category: "Provider Operations",
     eyebrow: "Provider Operations",
+
     description:
-      "Administrative provider credentialing and payer enrollment support for healthcare practices.",
+      "Administrative provider credentialing and payer enrollment support, including application coordination, document tracking, payer follow-up and revalidation.",
+
     heroDescription:
-      "Organize provider enrollment, payer applications and credentialing follow-up with clear administrative workflows.",
+      "Organize provider credentialing and payer enrollment with coordinated applications, document management and clear follow-up on outstanding requirements.",
+
     overview:
-      "Provider credentialing and payer enrollment involve collecting accurate provider information, coordinating applications and tracking payer requirements. claryden rcm can support these administrative workflows based on the team's verified expertise and the agreed service scope. Credentialing, enrollment and contracting are distinct processes, and payer approval timelines are not guaranteed.",
+      "Provider credentialing and payer enrollment involve collecting accurate provider information, coordinating applications and tracking payer-specific requirements. These administrative processes may include provider data review, document collection, application submission, follow-up and maintenance activities. Claryden RCM can support these workflows where the required expertise and resources are available, with the engagement scope confirmed during discovery. Credentialing, payer enrollment and contracting are distinct processes, and the responsibilities for each should be clearly defined. Payer approval, network participation and processing timelines depend on the applicable payer and are not guaranteed.",
+
     highlights: [
       "Provider information coordination",
       "Payer enrollment application support",
       "Application status follow-up",
       "Revalidation and maintenance tracking",
     ],
+
     deliverables: [
       {
         title: "Provider Information",
         description:
-          "Coordinate required provider and practice information through approved channels.",
+          "Coordinate required provider and practice information, including applicable administrative documents, through approved channels.",
       },
       {
         title: "Application Support",
         description:
-          "Prepare and coordinate payer enrollment or credentialing applications within the agreed scope.",
+          "Prepare and coordinate credentialing or payer enrollment applications within the agreed scope and applicable payer requirements.",
       },
       {
         title: "Payer Follow-Up",
         description:
-          "Track application status and communicate outstanding requirements.",
+          "Track application status, review available payer responses and communicate outstanding requirements to the practice.",
       },
       {
         title: "Document Coordination",
         description:
-          "Identify missing or expiring administrative documents and route requests appropriately.",
+          "Identify missing, incomplete or expiring administrative documents and route requests to the appropriate provider or practice team.",
       },
       {
         title: "Maintenance Tracking",
         description:
-          "Support agreed revalidation, renewal and maintenance workflows.",
+          "Support agreed revalidation, renewal and provider-information maintenance workflows where applicable.",
       },
       {
         title: "Status Reporting",
         description:
-          "Provide visibility into application progress, pending items and payer responses.",
+          "Provide agreed visibility into application progress, pending items, payer responses and administrative follow-up activity.",
       },
     ],
+
     process: [
       {
         title: "Review",
         description:
-          "Understand the provider's enrollment needs and applicable payer requirements.",
+          "Understand the provider's credentialing or enrollment needs, applicable payer requirements and the agreed service scope.",
       },
       {
         title: "Prepare",
         description:
-          "Coordinate information and documentation required for the application.",
+          "Coordinate the provider information and administrative documentation required for the relevant application.",
       },
       {
         title: "Submit",
         description:
-          "Support submission through the appropriate payer or enrollment channel.",
+          "Support application submission through the appropriate payer, enrollment or approved practice channel.",
       },
       {
         title: "Track",
         description:
-          "Follow up on application status and communicate outstanding requirements.",
+          "Follow up on application status, communicate outstanding requirements and coordinate agreed maintenance activities.",
       },
     ],
+
     relatedServices: [
       "medical-billing",
       "eligibility-verification",
       "ar-management",
     ],
   },
+
+  /* ------------------------------------------------------------------------ */
+  /* Medical Coding                                                           */
+  /* ------------------------------------------------------------------------ */
+
   {
     slug: "medical-coding",
     title: "Medical Coding Support",
     shortTitle: "Medical Coding",
     category: "Clinical Revenue Operations",
     eyebrow: "Medical Coding",
+
     description:
-      "Medical coding support aligned with clinical documentation, applicable code sets and payer requirements.",
+      "Medical coding support for healthcare practices, including documentation review, applicable code-set workflows, coding quality checks and billing coordination.",
+
     heroDescription:
-      "Connect documentation and coding workflows with accurate, compliant claim preparation.",
+      "Connect clinical documentation and qualified coding workflows with organized claim preparation and clear resolution of coding-related questions.",
+
     overview:
-      "Medical coding translates clinical documentation into the codes used for billing and reimbursement. Coding requirements vary by specialty, service and payer. claryden rcm can support coding workflows where appropriately qualified personnel and the required quality controls are available. Clinical documentation and medical decision-making remain the responsibility of the treating provider.",
+      "Medical coding translates clinical documentation into the codes used for healthcare billing and reimbursement. Requirements vary by specialty, service, code set and payer, and accurate code assignment depends on appropriate documentation and qualified review. Claryden RCM can support medical coding workflows where appropriately qualified personnel and the required quality controls are available. The scope may include documentation review, code assignment support, coding quality checks and coordination of provider clarification requests. Clinical documentation and medical decision-making remain the responsibility of the treating provider, while coding activities are performed within the agreed scope and applicable requirements.",
+
     highlights: [
       "Documentation-to-code workflow support",
       "Applicable code-set review",
       "Coding quality checks",
       "Provider documentation query coordination",
     ],
+
     deliverables: [
       {
         title: "Coding Workflow Review",
         description:
-          "Understand the practice's specialty, documentation process and coding requirements.",
+          "Review the practice's specialty, documentation process, applicable coding requirements and existing quality-control procedures.",
       },
       {
         title: "Code Assignment Support",
         description:
-          "Support coding using applicable code sets and available clinical documentation within the agreed scope.",
+          "Support code assignment using applicable code sets and available clinical documentation through appropriately qualified personnel.",
       },
       {
         title: "Coding Quality Review",
         description:
-          "Apply agreed quality checks and escalation procedures.",
+          "Apply agreed coding quality checks and coordinate review or escalation when documentation or code selection requires clarification.",
       },
       {
         title: "Documentation Queries",
         description:
-          "Coordinate clarification requests with the appropriate provider or clinical team when documentation is insufficient.",
+          "Coordinate clarification requests with the appropriate provider or clinical team when available documentation is incomplete or insufficient.",
       },
       {
         title: "Billing Coordination",
         description:
-          "Communicate coding-related issues that affect claim preparation or submission.",
+          "Communicate coding-related issues that may affect charge entry, claim preparation, submission or subsequent billing follow-up.",
       },
       {
         title: "Issue Reporting",
         description:
-          "Identify recurring documentation or coding workflow issues for practice review.",
+          "Identify recurring documentation or coding workflow issues and communicate findings for practice review and process improvement.",
       },
     ],
+
     process: [
       {
         title: "Assess",
         description:
-          "Confirm specialty requirements, coding scope and personnel qualifications.",
+          "Confirm specialty requirements, coding scope, personnel qualifications and applicable quality-control expectations.",
       },
       {
         title: "Review",
         description:
-          "Review available documentation through approved practice systems.",
+          "Review available clinical documentation and relevant coding information through approved practice systems.",
       },
       {
         title: "Code",
         description:
-          "Perform agreed coding activities with appropriate quality controls.",
+          "Perform agreed coding activities using applicable code sets, qualified personnel and appropriate quality controls.",
       },
       {
         title: "Coordinate",
         description:
-          "Resolve documentation questions and communicate billing-related issues.",
+          "Resolve documentation questions through the appropriate clinical team and communicate coding-related issues affecting billing.",
       },
     ],
+
     relatedServices: [
       "medical-billing",
       "denial-management",
@@ -646,10 +749,17 @@ export const services = [
   },
 ] as const satisfies readonly ServiceDefinition[];
 
-export type ServiceSlug = (typeof services)[number]["slug"];
+/* -------------------------------------------------------------------------- */
+/* Types & helpers                                                            */
+/* -------------------------------------------------------------------------- */
+
+export type ServiceSlug =
+  (typeof services)[number]["slug"];
 
 export function getServiceBySlug(
   slug: string
 ): ServiceDefinition | undefined {
-  return services.find((service) => service.slug === slug);
+  return services.find(
+    (service) => service.slug === slug
+  );
 }

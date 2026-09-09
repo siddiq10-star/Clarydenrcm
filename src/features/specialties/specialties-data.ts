@@ -1,5 +1,9 @@
 import type { ServiceSlug } from "@/features/services/services-data";
 
+/* -------------------------------------------------------------------------- */
+/* Types                                                                      */
+/* -------------------------------------------------------------------------- */
+
 export interface SpecialtyDefinition {
   slug: string;
   title: string;
@@ -15,40 +19,49 @@ export interface SpecialtyDefinition {
   relatedServices: readonly ServiceSlug[];
 }
 
+/* -------------------------------------------------------------------------- */
+/* Specialty content                                                          */
+/* -------------------------------------------------------------------------- */
+
 export const specialties = [
   {
     slug: "behavioral-health",
     title: "Behavioral Health Revenue Cycle Management",
     shortTitle: "Behavioral Health",
     category: "Specialty RCM",
+
     description:
-      "Revenue cycle support for behavioral health practices, with attention to eligibility, authorization, documentation, claims and payer follow-up.",
+      "Behavioral health medical billing and RCM support, including eligibility, authorization coordination, claim preparation, denials and payer follow-up.",
+
     heroDescription:
-      "Support behavioral health revenue workflows with clear coordination across patient access, billing and reimbursement.",
+      "Bring structure to behavioral health billing with coordinated eligibility, authorization, claim preparation and payer follow-up workflows.",
+
     overview:
-      "Behavioral health billing can involve service-specific coverage requirements, authorization rules, documentation considerations and payer-specific reimbursement policies. claryden rcm supports structured revenue-cycle workflows that help practices identify requirements, coordinate billing activity and follow unresolved claims through the appropriate resolution process.",
+      "Behavioral health revenue cycle management requires attention to service-specific coverage, authorization rules, documentation requirements and payer reimbursement policies. Depending on the practice and services provided, billing workflows may involve different benefit structures, visit requirements and claim-processing rules. Claryden RCM supports the administrative revenue cycle through defined workflows for verifying available coverage information, coordinating authorization requirements, preparing claims and following up on unresolved payer responses. Documentation and coding questions are directed to appropriately qualified personnel, while the scope of support is established around the practice's actual services, systems and payer requirements.",
+
     focusAreas: [
       {
         title: "Eligibility & Benefits",
         description:
-          "Review available coverage and benefit information relevant to behavioral health services.",
+          "Review available coverage, benefit and service-related information to identify applicable payer requirements before billing activity proceeds.",
       },
       {
         title: "Authorization Coordination",
         description:
-          "Support administrative authorization workflows where required by the payer or plan.",
+          "Coordinate administrative authorization requests, status tracking and follow-up where required by the payer or health plan.",
       },
       {
         title: "Documentation & Coding",
         description:
-          "Coordinate billing-related documentation and coding questions with appropriately qualified personnel.",
+          "Coordinate billing-related documentation and coding questions with appropriately qualified clinical or coding personnel.",
       },
       {
         title: "Denials & A/R",
         description:
-          "Investigate outstanding claims and denial reasons through structured payer follow-up.",
+          "Investigate outstanding claims, review denial reasons and coordinate payer follow-up, corrections or appeals where appropriate.",
       },
     ],
+
     relatedServices: [
       "eligibility-verification",
       "prior-authorization",
@@ -56,39 +69,45 @@ export const specialties = [
       "denial-management",
     ],
   },
+
   {
     slug: "family-medicine",
     title: "Family Medicine Revenue Cycle Management",
     shortTitle: "Family Medicine",
     category: "Primary Care",
+
     description:
-      "Revenue cycle support for family medicine practices across patient access, claim preparation, payment posting and insurance A/R.",
+      "Family medicine medical billing and RCM support across eligibility, claim preparation, payment posting and insurance accounts receivable.",
+
     heroDescription:
-      "Keep primary care billing workflows organized across everyday encounters, payer requirements and outstanding receivables.",
+      "Keep family medicine revenue workflows organized from patient access and claim preparation through payment posting and insurance A/R follow-up.",
+
     overview:
-      "Family medicine practices manage a broad range of patient encounters and services. Revenue-cycle operations require coordination between registration, eligibility, documentation, coding, claim submission and payment follow-up. claryden rcm supports these workflows through defined responsibilities, quality checks and consistent account resolution.",
+      "Family medicine practices manage a broad range of patient encounters, preventive services and ongoing care. Revenue-cycle operations require coordination between registration, eligibility verification, clinical documentation, coding, charge entry, claim submission and payment follow-up. Claryden RCM supports these administrative workflows through defined responsibilities, claim-quality checks and consistent account resolution processes. The operating scope is configured around the practice's services, approved systems and payer requirements, with clinical and coding decisions remaining with appropriately qualified personnel.",
+
     focusAreas: [
       {
         title: "Patient Access",
         description:
-          "Support eligibility and benefits verification before scheduled services.",
+          "Support eligibility and benefits verification before scheduled services and coordinate follow-up when available coverage information requires clarification.",
       },
       {
         title: "Claim Preparation",
         description:
-          "Coordinate charge entry and claim validation using the practice's approved documentation and billing workflows.",
+          "Coordinate charge entry, claim validation and submission using the practice's approved documentation and billing workflows.",
       },
       {
         title: "Payment Operations",
         description:
-          "Support insurance payment posting, adjustments and identification of remaining balances.",
+          "Support insurance payment posting, contractual adjustments and identification of remaining balances requiring additional review.",
       },
       {
         title: "Insurance A/R",
         description:
-          "Track outstanding claims and coordinate payer follow-up and escalation.",
+          "Track outstanding insurance claims, investigate payer responses and coordinate follow-up or escalation through defined workflows.",
       },
     ],
+
     relatedServices: [
       "medical-billing",
       "eligibility-verification",
@@ -96,39 +115,45 @@ export const specialties = [
       "ar-management",
     ],
   },
+
   {
     slug: "internal-medicine",
     title: "Internal Medicine Revenue Cycle Management",
     shortTitle: "Internal Medicine",
     category: "Primary Care",
+
     description:
-      "Structured billing and revenue-cycle support for internal medicine practices, including claims, denials, payments and A/R follow-up.",
+      "Internal medicine medical billing and RCM support for claim preparation, documentation coordination, denial management and insurance A/R.",
+
     heroDescription:
-      "Bring consistent billing operations and payer follow-through to internal medicine revenue workflows.",
+      "Support internal medicine billing with coordinated claim preparation, documentation workflows, denial resolution and revenue-cycle reporting.",
+
     overview:
-      "Internal medicine practices may manage a wide range of office-based services and ongoing patient care. Accurate billing depends on appropriate documentation, coding, payer requirements and coordinated follow-up. claryden rcm supports practices with structured workflows designed to keep billing activity visible and unresolved accounts moving toward resolution.",
+      "Internal medicine practices may manage a wide range of office-based services, chronic-condition care and ongoing patient encounters. Accurate billing depends on appropriate documentation, coding, payer requirements and timely coordination between clinical and administrative teams. Claryden RCM supports structured revenue-cycle workflows designed to keep billing activity visible and unresolved accounts moving through the appropriate follow-up process. Services may include claim preparation, documentation coordination, denial investigation and agreed operational reporting, with responsibilities and access requirements defined during discovery.",
+
     focusAreas: [
       {
         title: "Billing Coordination",
         description:
-          "Support charge entry, claim validation and submission through approved practice systems.",
+          "Support charge entry, claim validation and submission through approved practice systems and established billing procedures.",
       },
       {
         title: "Documentation Workflow",
         description:
-          "Route documentation or coding-related questions to the appropriate qualified team.",
+          "Route billing-related documentation or coding questions to appropriately qualified personnel for review and resolution.",
       },
       {
         title: "Denial Resolution",
         description:
-          "Investigate payer denials and coordinate corrections or appeals where appropriate.",
+          "Investigate payer denials, identify available resolution options and coordinate corrections, appeals or follow-up where appropriate.",
       },
       {
         title: "Revenue Visibility",
         description:
-          "Provide agreed reporting on claims, payments, aging receivables and unresolved issues.",
+          "Support agreed reporting on claims, payments, aging receivables and unresolved issues to help the practice review revenue-cycle activity.",
       },
     ],
+
     relatedServices: [
       "medical-billing",
       "medical-coding",
@@ -136,39 +161,45 @@ export const specialties = [
       "ar-management",
     ],
   },
+
   {
     slug: "dermatology",
     title: "Dermatology Revenue Cycle Management",
     shortTitle: "Dermatology",
     category: "Specialty RCM",
+
     description:
-      "Revenue cycle support for dermatology practices, with attention to documentation, coding, payer requirements and claims follow-up.",
+      "Dermatology medical billing and RCM support for coverage review, procedure billing coordination, claim validation and denial follow-up.",
+
     heroDescription:
-      "Coordinate dermatology billing workflows across clinical documentation, claim preparation and payer resolution.",
+      "Coordinate dermatology revenue workflows across coverage requirements, clinical documentation, claim preparation and payer resolution.",
+
     overview:
-      "Dermatology revenue-cycle workflows may involve office visits, procedures and services with different coverage and documentation requirements. Billing teams must distinguish applicable payer requirements and coordinate coding and claim preparation appropriately. claryden rcm supports the administrative revenue cycle while clinical decisions and coding responsibilities remain with qualified personnel.",
+      "Dermatology revenue-cycle workflows may involve office visits, procedures and other services with different coverage, documentation and reimbursement requirements. Billing teams must distinguish applicable payer policies and coordinate claim preparation with the practice's approved clinical documentation and coding processes. Claryden RCM supports the administrative revenue cycle through coverage review, billing coordination, claim validation and payer follow-up. Clinical decisions and coding responsibilities remain with appropriately qualified personnel, and the service scope is defined around the practice's actual procedures, systems and payer requirements.",
+
     focusAreas: [
       {
         title: "Coverage Review",
         description:
-          "Support verification of applicable benefits and payer requirements for scheduled services.",
+          "Support verification of available benefits and applicable payer requirements for scheduled dermatology services.",
       },
       {
         title: "Procedure Billing",
         description:
-          "Coordinate claim preparation and coding-related questions for documented services.",
+          "Coordinate claim preparation and billing-related coding questions for documented services using approved practice workflows.",
       },
       {
         title: "Claim Validation",
         description:
-          "Review claims for required billing information and applicable edits.",
+          "Review claims for required billing information, applicable edits and issues that may require clarification before submission.",
       },
       {
         title: "Denial Follow-Up",
         description:
-          "Investigate denials and coordinate the appropriate correction, appeal or payer action.",
+          "Investigate payer denials and coordinate appropriate corrections, appeals or additional follow-up within the agreed service scope.",
       },
     ],
+
     relatedServices: [
       "medical-billing",
       "medical-coding",
@@ -176,39 +207,45 @@ export const specialties = [
       "denial-management",
     ],
   },
+
   {
     slug: "cardiology",
     title: "Cardiology Revenue Cycle Management",
     shortTitle: "Cardiology",
     category: "Specialty RCM",
+
     description:
-      "Revenue cycle support for cardiology practices across eligibility, authorization, documentation, billing and insurance A/R.",
+      "Cardiology medical billing and RCM support across eligibility, authorization, documentation coordination, claims and insurance A/R.",
+
     heroDescription:
-      "Bring structured coordination to cardiology billing and reimbursement workflows.",
+      "Bring structured coordination to cardiology billing, from coverage and authorization requirements through claim processing and payer follow-up.",
+
     overview:
-      "Cardiology practices may perform a range of evaluation, diagnostic and procedural services with differing payer and documentation requirements. Revenue-cycle support requires careful coordination between clinical teams, coding personnel, authorization workflows and billing operations. claryden rcm supports defined administrative workflows and payer follow-up within the agreed scope.",
+      "Cardiology practices may provide evaluation, diagnostic and procedural services with differing payer, authorization and documentation requirements. Revenue-cycle support requires careful coordination between patient access, clinical teams, qualified coding personnel and billing operations. Claryden RCM supports defined administrative workflows for coverage verification, authorization coordination, claim preparation and payer follow-up. The engagement scope is established around the practice's services and approved systems, while clinical decisions and coding responsibilities remain with appropriately qualified professionals.",
+
     focusAreas: [
       {
         title: "Eligibility & Authorization",
         description:
-          "Coordinate coverage verification and administrative authorization requirements where applicable.",
+          "Coordinate coverage verification, available benefit information and administrative authorization requirements where applicable.",
       },
       {
         title: "Documentation Coordination",
         description:
-          "Route billing-related documentation and coding questions to appropriately qualified personnel.",
+          "Route billing-related documentation and coding questions to appropriately qualified clinical or coding personnel.",
       },
       {
         title: "Claim Processing",
         description:
-          "Support claim preparation, validation and submission through approved systems.",
+          "Support claim preparation, validation and submission through approved systems and established billing workflows.",
       },
       {
         title: "A/R & Denials",
         description:
-          "Investigate outstanding balances and coordinate payer resolution activities.",
+          "Investigate outstanding insurance balances, review payer responses and coordinate appropriate resolution or escalation activities.",
       },
     ],
+
     relatedServices: [
       "prior-authorization",
       "medical-coding",
@@ -216,39 +253,45 @@ export const specialties = [
       "ar-management",
     ],
   },
+
   {
     slug: "orthopedics",
     title: "Orthopedic Revenue Cycle Management",
     shortTitle: "Orthopedics",
     category: "Specialty RCM",
+
     description:
-      "Revenue cycle support for orthopedic practices, including authorization coordination, billing, denials and insurance receivables.",
+      "Orthopedic medical billing and RCM support for authorization coordination, documentation, claim management, denials and insurance A/R.",
+
     heroDescription:
-      "Support orthopedic revenue workflows with coordinated authorization, claim and payer follow-up processes.",
+      "Support orthopedic revenue workflows with coordinated authorization, documentation, claim management and payer follow-up processes.",
+
     overview:
-      "Orthopedic practices may manage office visits, procedures and other services with distinct documentation, authorization and reimbursement considerations. Effective revenue-cycle operations require coordination across patient access, clinical documentation, coding and payer follow-up. claryden rcm supports the administrative workflow while clinical and coding decisions remain with appropriately qualified professionals.",
+      "Orthopedic practices may manage office visits, procedures and other services with distinct documentation, authorization and reimbursement considerations. Effective revenue-cycle operations require coordination across patient access, clinical documentation, qualified coding personnel, claim preparation and payer follow-up. Claryden RCM supports the administrative workflow through defined responsibilities and structured account resolution processes. Clinical and coding decisions remain with appropriately qualified professionals, and the service scope is configured around the practice's actual services, systems and payer requirements.",
+
     focusAreas: [
       {
         title: "Authorization Support",
         description:
-          "Coordinate administrative authorization requirements and track pending requests.",
+          "Coordinate administrative authorization requirements, track pending requests and follow up on available payer responses.",
       },
       {
         title: "Coding & Documentation",
         description:
-          "Support billing-related coordination with qualified coding and clinical personnel.",
+          "Support billing-related coordination with qualified coding and clinical personnel when documentation or coding questions require review.",
       },
       {
         title: "Claim Management",
         description:
-          "Support claim validation, submission and rejection resolution.",
+          "Support claim validation, submission and rejection resolution through approved practice systems and defined billing workflows.",
       },
       {
         title: "Revenue Recovery",
         description:
-          "Investigate denials and aging insurance receivables through defined follow-up workflows.",
+          "Investigate denials and aging insurance receivables, then coordinate appropriate payer follow-up, corrections or escalation.",
       },
     ],
+
     relatedServices: [
       "prior-authorization",
       "medical-coding",
@@ -256,39 +299,45 @@ export const specialties = [
       "ar-management",
     ],
   },
+
   {
     slug: "physical-therapy",
     title: "Physical Therapy Revenue Cycle Management",
     shortTitle: "Physical Therapy",
     category: "Specialty RCM",
+
     description:
-      "Revenue cycle support for physical therapy practices, with attention to benefits, authorization, documentation and payer follow-up.",
+      "Physical therapy medical billing and RCM support for benefits, visit information, authorization tracking, claims and denial follow-up.",
+
     heroDescription:
-      "Coordinate therapy revenue workflows from coverage verification through billing and outstanding claim resolution.",
+      "Coordinate physical therapy revenue workflows from benefits and visit information through authorization tracking, billing and claim resolution.",
+
     overview:
-      "Physical therapy billing can involve visit limits, authorization requirements, plan-specific benefits and documentation considerations. These requirements vary by payer and service. claryden rcm supports administrative verification, billing and follow-up workflows while clinical documentation and medical-necessity decisions remain with qualified professionals.",
+      "Physical therapy billing can involve visit limits, authorization requirements, plan-specific benefits and documentation considerations. These requirements vary by payer, plan and service, making coordination between patient access, clinical teams and billing operations important. Claryden RCM supports administrative verification, authorization tracking, claim preparation and payer follow-up workflows within the agreed service scope. Clinical documentation, treatment decisions and medical-necessity determinations remain with appropriately qualified professionals.",
+
     focusAreas: [
       {
         title: "Benefits & Visit Information",
         description:
-          "Review available therapy benefits, visit limitations and applicable coverage information.",
+          "Review available therapy benefits, visit limitations and applicable coverage information to identify requirements requiring follow-up.",
       },
       {
         title: "Authorization Tracking",
         description:
-          "Support administrative authorization coordination and status tracking where required.",
+          "Support administrative authorization coordination, status tracking and follow-up where required by the payer or health plan.",
       },
       {
         title: "Billing Coordination",
         description:
-          "Support claim preparation using approved documentation and qualified coding workflows.",
+          "Support claim preparation using approved clinical documentation and established workflows involving appropriately qualified coding personnel.",
       },
       {
         title: "Denials & A/R",
         description:
-          "Investigate unpaid claims and coordinate payer follow-up and appropriate resolution.",
+          "Investigate unpaid claims, review payer responses and coordinate appropriate corrections, appeals or account follow-up.",
       },
     ],
+
     relatedServices: [
       "eligibility-verification",
       "prior-authorization",
@@ -296,39 +345,45 @@ export const specialties = [
       "denial-management",
     ],
   },
+
   {
     slug: "pain-management",
     title: "Pain Management Revenue Cycle Management",
     shortTitle: "Pain Management",
     category: "Specialty RCM",
+
     description:
-      "Revenue cycle support for pain management practices across authorization, documentation coordination, billing and payer resolution.",
+      "Pain management medical billing and RCM support across coverage, authorization, documentation coordination, claims and payer resolution.",
+
     heroDescription:
-      "Bring structure to complex pain management billing workflows and payer follow-through.",
+      "Bring structure to pain management billing with coordinated coverage review, authorization, documentation and payer follow-up workflows.",
+
     overview:
-      "Pain management practices may provide evaluation and procedural services with differing coverage, authorization and documentation requirements. Revenue-cycle operations require coordination with clinical and qualified coding teams, careful attention to payer requirements and consistent follow-up on unresolved claims. claryden rcm supports these administrative workflows within the agreed service scope.",
+      "Pain management practices may provide evaluation and procedural services with differing coverage, authorization and documentation requirements. Revenue-cycle operations require coordination with clinical teams and appropriately qualified coding personnel, careful attention to payer policies and consistent follow-up on unresolved claims. Claryden RCM supports administrative workflows for coverage review, authorization coordination, claim preparation and payer resolution within the agreed service scope. Clinical decisions, medical-necessity determinations and coding responsibilities remain with appropriately qualified professionals.",
+
     focusAreas: [
       {
         title: "Coverage & Authorization",
         description:
-          "Support benefit verification and administrative authorization coordination where applicable.",
+          "Support benefit verification and administrative authorization coordination where applicable to the practice's services and payer requirements.",
       },
       {
         title: "Documentation Coordination",
         description:
-          "Route billing-related documentation and coding questions to qualified personnel.",
+          "Route billing-related documentation and coding questions to appropriately qualified clinical or coding personnel.",
       },
       {
         title: "Claim Processing",
         description:
-          "Support claim preparation, validation and submission through approved systems.",
+          "Support claim preparation, validation and submission through approved practice systems and established billing workflows.",
       },
       {
         title: "Denial & A/R Follow-Up",
         description:
-          "Investigate payer responses and coordinate appropriate resolution activities.",
+          "Investigate payer responses, review outstanding insurance balances and coordinate appropriate resolution or escalation activities.",
       },
     ],
+
     relatedServices: [
       "prior-authorization",
       "medical-coding",
@@ -337,6 +392,10 @@ export const specialties = [
     ],
   },
 ] as const satisfies readonly SpecialtyDefinition[];
+
+/* -------------------------------------------------------------------------- */
+/* Types & helpers                                                            */
+/* -------------------------------------------------------------------------- */
 
 export type SpecialtySlug =
   (typeof specialties)[number]["slug"];
