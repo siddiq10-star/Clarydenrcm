@@ -18,10 +18,10 @@ import {
 import { Container } from "@/components/ui/container";
 import { siteConfig } from "@/config/site";
 
-const aboutTitle = "About Kinz HealthOps";
+const aboutTitle = "About claryden rcm";
 
 const aboutDescription =
-  "Learn about Kinz HealthOps, our approach to medical billing and revenue cycle management, and our focus on structured workflows, clear communication and responsible healthcare operations.";
+  "Learn about claryden rcm, our approach to medical billing and revenue cycle management, and our focus on structured workflows, clear communication and responsible healthcare operations.";
 
 export const metadata: Metadata = {
   title: aboutTitle,
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     description: aboutDescription,
     images: [
       {
-        url: "/og/kinz-healthops-og.jpg",
+        url: "/og/claryden-rcm-og.jpg",
         width: 1200,
         height: 630,
         alt: `${siteConfig.name} — ${siteConfig.positioning}`,
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: aboutTitle,
     description: aboutDescription,
-    images: ["/og/kinz-healthops-og.jpg"],
+    images: ["/og/claryden-rcm-og.jpg"],
   },
 };
 
@@ -170,7 +170,7 @@ function Hero() {
             strokeWidth={1.8}
           />
 
-          About Kinz HealthOps
+          About claryden rcm
         </div>
 
         <h1
@@ -187,7 +187,7 @@ function Hero() {
         </h1>
 
         <p className="mt-7 max-w-[700px] text-[15px] leading-7 text-[#526b76] sm:text-[17px] sm:leading-8">
-          Kinz HealthOps is a medical billing and revenue cycle management
+          claryden rcm is a medical billing and revenue cycle management
           business focused on helping U.S. healthcare practices organize
           billing, payer follow-up and related revenue workflows through
           structured processes and clear communication.
@@ -264,7 +264,7 @@ function AboutPanel() {
         </div>
 
         <p className="mt-8 text-[10px] leading-5 font-bold uppercase tracking-[0.15em] text-[#6de3da]">
-          Kinz HealthOps
+          claryden rcm
         </p>
 
         <h2
@@ -284,7 +284,7 @@ function AboutPanel() {
         </p>
 
         <ol
-          aria-label="Kinz HealthOps foundation"
+          aria-label="claryden rcm foundation"
           className="mt-8 list-none space-y-2.5"
         >
           {pillars.map((pillar) => {
@@ -362,7 +362,7 @@ function WhoWeAre() {
 
         <div className="min-w-0 space-y-5">
           <p className="text-[15px] leading-8 text-[#526b76]">
-            Kinz HealthOps brings together practical revenue-cycle experience
+            claryden rcm brings together practical revenue-cycle experience
             with technology and business development. Our focus is on building
             a service organization that understands the operational realities
             of healthcare billing while maintaining clear processes and
@@ -471,7 +471,7 @@ function OurPrinciples() {
                     />
 
                     <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-[#71858e]">
-                      Kinz HealthOps
+                      claryden rcm
                     </span>
                   </div>
                 </div>

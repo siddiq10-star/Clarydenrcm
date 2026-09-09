@@ -13,7 +13,7 @@ import { Container } from "@/components/ui/container";
 import { siteConfig } from "@/config/site";
 
 /**
- * Kinz HealthOps — Terms of Use
+ * claryden rcm — Terms of Use
  *
  * Legal review required before publication.
  *
@@ -46,10 +46,10 @@ const isPublished =
 const pageTitle = "Terms of Use";
 
 const pageDescription =
-  "Review the terms governing use of the Kinz HealthOps website, business inquiries, revenue cycle assessments, and related information.";
+  "Review the terms governing use of the claryden rcm website, business inquiries, revenue cycle assessments, and related information.";
 
 export const metadata: Metadata = {
-  title: `${pageTitle} | Kinz HealthOps`,
+  title: `${pageTitle} | claryden rcm`,
   description: pageDescription,
 
   alternates: {
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: `${pageTitle} | Kinz HealthOps`,
+    title: `${pageTitle} | claryden rcm`,
     description: pageDescription,
     type: "website",
     url: "/terms",
@@ -81,11 +81,11 @@ const sections: readonly LegalSection[] = [
     id: "acceptance",
     title: "1. Acceptance of These Terms",
     paragraphs: [
-      "These Terms of Use govern your access to and use of the Kinz HealthOps website, including its public pages, business inquiry forms, and revenue cycle assessment request features.",
+      "These Terms of Use govern your access to and use of the claryden rcm website, including its public pages, business inquiry forms, and revenue cycle assessment request features.",
 
       "By accessing or using the website, you agree to comply with these Terms. If you do not agree, please discontinue use of the website.",
 
-      "Kinz HealthOps is the business name used on this website. The legal entity responsible for operating the website will be identified in the approved version of these Terms. References to “we,” “us,” and “our” refer to that entity.",
+      "claryden rcm is the business name used on this website. The legal entity responsible for operating the website will be identified in the approved version of these Terms. References to “we,” “us,” and “our” refer to that entity.",
 
       "If you use the website on behalf of a healthcare practice, company, or other organization, you represent that you are authorized to provide the information you submit and to act on behalf of that organization in connection with the inquiry.",
     ],
@@ -95,7 +95,7 @@ const sections: readonly LegalSection[] = [
     id: "website-purpose",
     title: "2. Website Purpose",
     paragraphs: [
-      "The website provides general information about revenue cycle management, medical billing, and related healthcare administrative services. It also allows prospective clients and business contacts to communicate with Kinz HealthOps.",
+      "The website provides general information about revenue cycle management, medical billing, and related healthcare administrative services. It also allows prospective clients and business contacts to communicate with claryden rcm.",
 
       "Website content is provided for general informational and business-development purposes. It is not medical, legal, tax, accounting, coding, reimbursement, or other professional advice, and it should not be relied upon as a substitute for advice from appropriately qualified professionals.",
 
@@ -137,7 +137,7 @@ const sections: readonly LegalSection[] = [
     paragraphs: [
       "Public website forms are intended for business and operational information only. You must not submit patient names, dates of birth, medical records, insurance member identifiers, diagnoses, claim-level details, or other protected health information through these forms.",
 
-      "Ordinary business email and public website forms should not be treated as approved channels for transmitting patient information. Do not send PHI through these channels unless Kinz HealthOps has expressly established and authorized an appropriate workflow for that purpose.",
+      "Ordinary business email and public website forms should not be treated as approved channels for transmitting patient information. Do not send PHI through these channels unless claryden rcm has expressly established and authorized an appropriate workflow for that purpose.",
 
       "If patient information is inadvertently submitted, please contact us through the designated business contact method without including additional patient information. The information will be handled in accordance with applicable privacy, security, and incident-handling procedures.",
 
@@ -181,7 +181,7 @@ const sections: readonly LegalSection[] = [
     id: "intellectual-property",
     title: "8. Intellectual Property",
     paragraphs: [
-      "Unless otherwise stated, the website's original design, text, graphics, branding, software, and other materials are owned by or licensed to Kinz HealthOps and are protected by applicable intellectual property laws.",
+      "Unless otherwise stated, the website's original design, text, graphics, branding, software, and other materials are owned by or licensed to claryden rcm and are protected by applicable intellectual property laws.",
 
       "You may view and use website content for your own lawful, internal business evaluation. You may not reproduce, distribute, modify, commercially exploit, or create derivative works from substantial portions of the website without prior written permission, except where permitted by applicable law.",
 
@@ -241,7 +241,7 @@ const sections: readonly LegalSection[] = [
     id: "liability",
     title: "13. Limitation of Liability",
     paragraphs: [
-      "To the extent permitted by applicable law, Kinz HealthOps and its responsible legal entity will not be liable for indirect, incidental, special, consequential, or punitive damages arising solely from use of, or inability to use, the public website, including loss of profits, business opportunities, or data, where such exclusions are legally permitted.",
+      "To the extent permitted by applicable law, claryden rcm and its responsible legal entity will not be liable for indirect, incidental, special, consequential, or punitive damages arising solely from use of, or inability to use, the public website, including loss of profits, business opportunities, or data, where such exclusions are legally permitted.",
 
       "These website limitations do not replace or override liability provisions in an applicable executed service agreement or Business Associate Agreement.",
 
@@ -309,7 +309,7 @@ const sections: readonly LegalSection[] = [
     id: "contact",
     title: "19. Contact",
     paragraphs: [
-      "For questions about these Terms or the use of the website, please contact Kinz HealthOps through the contact information published on our website.",
+      "For questions about these Terms or the use of the website, please contact claryden rcm through the contact information published on our website.",
 
       "The approved version of these Terms will identify the responsible legal entity, business address, and designated legal or business contact. Please do not include patient information in ordinary business correspondence.",
     ],
@@ -533,12 +533,12 @@ export default function TermsPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: `${pageTitle} | Kinz HealthOps`,
+    name: `${pageTitle} | claryden rcm`,
     description: pageDescription,
     url: canonicalUrl,
     isPartOf: {
       "@type": "WebSite",
-      name: "Kinz HealthOps",
+      name: "claryden rcm",
       url: homeUrl,
     },
     breadcrumb: {
@@ -683,7 +683,7 @@ export default function TermsPage() {
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#0b958a]">
-                Kinz HealthOps
+                claryden rcm
               </p>
 
               <h2 className="mt-3 text-[24px] font-semibold tracking-[-0.045em] text-[#102d38] sm:text-[30px]">

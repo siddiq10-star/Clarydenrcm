@@ -4,10 +4,10 @@ import { RcmAssessment } from "@/features/assessment/rcm-assessment";
 import { siteConfig } from "@/config/site";
 
 const pageTitle =
-  "Revenue Cycle Management Assessment | Kinz HealthOps";
+  "Revenue Cycle Management Assessment | claryden rcm";
 
 const pageDescription =
-  "Request a structured revenue cycle management assessment from Kinz HealthOps. Discuss your practice's medical billing, denial management, accounts receivable, and RCM priorities.";
+  "Request a structured revenue cycle management assessment from claryden rcm. Discuss your practice's medical billing, denial management, accounts receivable, and RCM priorities.";
 
 const pageUrl = new URL(
   "/rcm-assessment",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     title: pageTitle,
     description: pageDescription,
     url: pageUrl,
-    siteName: "Kinz HealthOps",
+    siteName: "claryden rcm",
     locale: "en_US",
     type: "website",
   },

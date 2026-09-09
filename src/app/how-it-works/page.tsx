@@ -22,9 +22,9 @@ import { siteConfig } from "@/config/site";
 
 // Keep the public origin in siteConfig. Do not hard-code a deployment URL.
 const pageUrl = new URL("/how-it-works", siteConfig.url).toString();
-const pageTitle = "RCM Engagement Process & Onboarding | Kinz HealthOps";
+const pageTitle = "RCM Engagement Process & Onboarding | claryden rcm";
 const pageDescription =
-  "Learn how Kinz HealthOps approaches medical billing and revenue cycle management, from practice discovery and scope definition to onboarding, operations and reporting.";
+  "Learn how claryden rcm approaches medical billing and revenue cycle management, from practice discovery and scope definition to onboarding, operations and reporting.";
 
 export const metadata: Metadata = {
   title: { absolute: pageTitle },
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     title: pageTitle,
     description: pageDescription,
     url: pageUrl,
-    siteName: "Kinz HealthOps",
+    siteName: "claryden rcm",
     type: "website",
   },
   twitter: {

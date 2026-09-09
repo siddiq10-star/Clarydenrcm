@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   title: "Medical Billing & RCM by Specialty",
 
   description:
-    "Explore Kinz HealthOps revenue cycle management support for behavioral health, family medicine, internal medicine, dermatology, cardiology, orthopedics, physical therapy and pain management practices.",
+    "Explore claryden rcm revenue cycle management support for behavioral health, family medicine, internal medicine, dermatology, cardiology, orthopedics, physical therapy and pain management practices.",
 
   alternates: {
     canonical: "/specialties",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 
   openGraph: {
     title:
-      "Medical Billing & RCM by Specialty | Kinz HealthOps",
+      "Medical Billing & RCM by Specialty | claryden rcm",
 
     description:
       "Specialty-focused revenue cycle support for modern healthcare practices.",

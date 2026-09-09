@@ -1,9 +1,9 @@
 export const siteConfig = {
-  name: "Kinz HealthOps",
+  name: "claryden rcm",
 
-  shortName: "Kinz HealthOps",
+  shortName: "claryden rcm",
 
-  legalName: "Kinz HealthOps",
+  legalName: "claryden rcm",
 
   tagline: "Every claim. Every dollar. Clearly managed.",
 
@@ -11,19 +11,19 @@ export const siteConfig = {
     "Revenue Cycle Management for Modern Healthcare Practices",
 
   description:
-    "Kinz HealthOps provides revenue cycle management, medical billing, denial management, accounts receivable follow-up, eligibility verification, payment posting, credentialing, and healthcare revenue operations for medical practices.",
+    "claryden rcm provides revenue cycle management, medical billing, denial management, accounts receivable follow-up, eligibility verification, payment posting, credentialing, and healthcare revenue operations for medical practices.",
 
   shortDescription:
     "Modern revenue cycle management for healthcare practices.",
 
   url:
     process.env.NEXT_PUBLIC_SITE_URL ??
-    "https://www.kinzhealthops.com",
+    "https://www.clarydenrcm.com",
 
   contact: {
     email:
       process.env.NEXT_PUBLIC_CONTACT_EMAIL ??
-      "hello@kinzhealthops.com",
+      "hello@clarydenrcm.com",
 
     phone:
       process.env.NEXT_PUBLIC_PHONE_NUMBER ??
@@ -31,7 +31,7 @@ export const siteConfig = {
 
     salesEmail:
       process.env.NEXT_PUBLIC_SALES_EMAIL ??
-      "hello@kinzhealthops.com",
+      "hello@clarydenrcm.com",
   },
 
   location: {
@@ -60,10 +60,10 @@ export const siteConfig = {
   },
 
   seo: {
-    titleTemplate: "%s | Kinz HealthOps",
+    titleTemplate: "%s | claryden rcm",
 
     defaultTitle:
-      "Kinz HealthOps | Revenue Cycle Management for Healthcare Practices",
+      "claryden rcm | Revenue Cycle Management for Healthcare Practices",
 
     keywords: [
       "revenue cycle management",

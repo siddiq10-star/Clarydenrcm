@@ -363,7 +363,7 @@ function RecoveryPanel({
       <div className="relative grid min-w-0 gap-8 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:items-center">
         <div className="min-w-0">
           <p className="text-[10px] leading-5 font-bold uppercase tracking-[0.14em] text-[#73e9df] sm:tracking-[0.16em]">
-            The Kinz HealthOps Response
+            The claryden rcm Response
           </p>
 
           <h3 className="mt-4 max-w-[620px] text-[clamp(2rem,3.6vw,4.1rem)] leading-[1.05] font-semibold tracking-[-0.05em] sm:leading-[1] sm:tracking-[-0.055em]">

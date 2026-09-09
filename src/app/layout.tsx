@@ -22,7 +22,7 @@ const geistMono = Geist_Mono({
 });
 
 const socialImage = {
-  url: "/og/kinz-healthops-og.jpg",
+  url: "/og/claryden-rcm-og.jpg",
   width: 1200,
   height: 630,
   alt: `${siteConfig.name} — ${siteConfig.positioning}`,

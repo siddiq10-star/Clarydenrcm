@@ -227,7 +227,7 @@ function HeroContent() {
       </h1>
 
       <p className="mt-7 max-w-[620px] text-[clamp(1rem,1.1vw,1.12rem)] leading-[1.75] text-[#536b76]">
-        Kinz HealthOps brings structured billing, denial management,
+        claryden rcm brings structured billing, denial management,
         A/R follow-up and revenue-cycle visibility into one disciplined
         operating model built for modern healthcare practices.
       </p>

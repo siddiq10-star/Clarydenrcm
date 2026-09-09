@@ -15,13 +15,13 @@ export type PrivacyPolicy = {
 };
 
 /**
- * Kinz HealthOps Privacy Policy
+ * claryden rcm Privacy Policy
  *
  * IMPORTANT:
  * This is a drafting source, not an approved legal policy.
  *
  * Before publication, confirm:
- * - The legal entity operating Kinz HealthOps.
+ * - The legal entity operating claryden rcm.
  * - Registered/business address and privacy contact.
  * - Actual hosting, analytics, email, security, and CRM providers.
  * - Data storage locations and international transfer practices.
@@ -38,7 +38,7 @@ export const privacyPolicy: PrivacyPolicy = {
   title: "Privacy Policy",
 
   description:
-    "Learn how Kinz HealthOps handles business inquiries, website information, and privacy-related requests.",
+    "Learn how claryden rcm handles business inquiries, website information, and privacy-related requests.",
 
   effectiveDate: null,
 
@@ -51,11 +51,11 @@ export const privacyPolicy: PrivacyPolicy = {
       id: "overview",
       title: "1. Overview",
       paragraphs: [
-        "Kinz HealthOps provides information about revenue cycle management and related healthcare administrative services. This Privacy Policy explains how information is handled when visitors use our website, contact us, or request a revenue cycle assessment.",
+        "claryden rcm provides information about revenue cycle management and related healthcare administrative services. This Privacy Policy explains how information is handled when visitors use our website, contact us, or request a revenue cycle assessment.",
 
         "The legal entity responsible for this website, its business address, and its designated privacy contact will be identified in the approved version of this Policy. The Policy should be read together with our Terms of Use and any applicable service agreements.",
 
-        "This Policy concerns our public website and business-inquiry activities. Where Kinz HealthOps performs services involving protected health information on behalf of a healthcare organization, the applicable service agreement, business associate agreement, and relevant privacy and security requirements govern that processing.",
+        "This Policy concerns our public website and business-inquiry activities. Where claryden rcm performs services involving protected health information on behalf of a healthcare organization, the applicable service agreement, business associate agreement, and relevant privacy and security requirements govern that processing.",
       ],
     },
 
@@ -123,7 +123,7 @@ export const privacyPolicy: PrivacyPolicy = {
       id: "international-processing",
       title: "7. International Processing",
       paragraphs: [
-        "Kinz HealthOps may serve healthcare organizations in the United States while operating through personnel or service providers in other countries. The approved Policy will describe the actual locations and arrangements relevant to website and business-inquiry processing.",
+        "claryden rcm may serve healthcare organizations in the United States while operating through personnel or service providers in other countries. The approved Policy will describe the actual locations and arrangements relevant to website and business-inquiry processing.",
 
         "Where international processing is involved, we will evaluate applicable privacy requirements, contractual obligations, and appropriate safeguards. Any processing of PHI must additionally comply with the relevant healthcare service agreements and applicable HIPAA requirements.",
       ],
@@ -159,7 +159,7 @@ export const privacyPolicy: PrivacyPolicy = {
 
         "You may contact our designated privacy contact to submit a request. We may need to verify your identity and may be required or permitted to retain certain information or decline a request in circumstances allowed by law.",
 
-        "Requests concerning patient medical records or other PHI held by a healthcare provider should generally be directed to the relevant provider or its designated privacy office. Where Kinz HealthOps acts as a business associate, requests will be handled in accordance with the applicable agreements and legal obligations.",
+        "Requests concerning patient medical records or other PHI held by a healthcare provider should generally be directed to the relevant provider or its designated privacy office. Where claryden rcm acts as a business associate, requests will be handled in accordance with the applicable agreements and legal obligations.",
       ],
     },
 
@@ -193,7 +193,7 @@ export const privacyPolicy: PrivacyPolicy = {
       id: "contact",
       title: "14. Contact Us",
       paragraphs: [
-        "For questions about this Privacy Policy or to submit a privacy-related request, please contact Kinz HealthOps through the designated privacy contact published on this website.",
+        "For questions about this Privacy Policy or to submit a privacy-related request, please contact claryden rcm through the designated privacy contact published on this website.",
 
         "The approved version of this Policy will include the responsible legal entity, business address, and a working privacy contact email. Please do not send patient information through the public contact form or ordinary business email.",
       ],

@@ -26,7 +26,7 @@ export const specialties = [
     heroDescription:
       "Support behavioral health revenue workflows with clear coordination across patient access, billing and reimbursement.",
     overview:
-      "Behavioral health billing can involve service-specific coverage requirements, authorization rules, documentation considerations and payer-specific reimbursement policies. Kinz HealthOps supports structured revenue-cycle workflows that help practices identify requirements, coordinate billing activity and follow unresolved claims through the appropriate resolution process.",
+      "Behavioral health billing can involve service-specific coverage requirements, authorization rules, documentation considerations and payer-specific reimbursement policies. claryden rcm supports structured revenue-cycle workflows that help practices identify requirements, coordinate billing activity and follow unresolved claims through the appropriate resolution process.",
     focusAreas: [
       {
         title: "Eligibility & Benefits",
@@ -66,7 +66,7 @@ export const specialties = [
     heroDescription:
       "Keep primary care billing workflows organized across everyday encounters, payer requirements and outstanding receivables.",
     overview:
-      "Family medicine practices manage a broad range of patient encounters and services. Revenue-cycle operations require coordination between registration, eligibility, documentation, coding, claim submission and payment follow-up. Kinz HealthOps supports these workflows through defined responsibilities, quality checks and consistent account resolution.",
+      "Family medicine practices manage a broad range of patient encounters and services. Revenue-cycle operations require coordination between registration, eligibility, documentation, coding, claim submission and payment follow-up. claryden rcm supports these workflows through defined responsibilities, quality checks and consistent account resolution.",
     focusAreas: [
       {
         title: "Patient Access",
@@ -106,7 +106,7 @@ export const specialties = [
     heroDescription:
       "Bring consistent billing operations and payer follow-through to internal medicine revenue workflows.",
     overview:
-      "Internal medicine practices may manage a wide range of office-based services and ongoing patient care. Accurate billing depends on appropriate documentation, coding, payer requirements and coordinated follow-up. Kinz HealthOps supports practices with structured workflows designed to keep billing activity visible and unresolved accounts moving toward resolution.",
+      "Internal medicine practices may manage a wide range of office-based services and ongoing patient care. Accurate billing depends on appropriate documentation, coding, payer requirements and coordinated follow-up. claryden rcm supports practices with structured workflows designed to keep billing activity visible and unresolved accounts moving toward resolution.",
     focusAreas: [
       {
         title: "Billing Coordination",
@@ -146,7 +146,7 @@ export const specialties = [
     heroDescription:
       "Coordinate dermatology billing workflows across clinical documentation, claim preparation and payer resolution.",
     overview:
-      "Dermatology revenue-cycle workflows may involve office visits, procedures and services with different coverage and documentation requirements. Billing teams must distinguish applicable payer requirements and coordinate coding and claim preparation appropriately. Kinz HealthOps supports the administrative revenue cycle while clinical decisions and coding responsibilities remain with qualified personnel.",
+      "Dermatology revenue-cycle workflows may involve office visits, procedures and services with different coverage and documentation requirements. Billing teams must distinguish applicable payer requirements and coordinate coding and claim preparation appropriately. claryden rcm supports the administrative revenue cycle while clinical decisions and coding responsibilities remain with qualified personnel.",
     focusAreas: [
       {
         title: "Coverage Review",
@@ -186,7 +186,7 @@ export const specialties = [
     heroDescription:
       "Bring structured coordination to cardiology billing and reimbursement workflows.",
     overview:
-      "Cardiology practices may perform a range of evaluation, diagnostic and procedural services with differing payer and documentation requirements. Revenue-cycle support requires careful coordination between clinical teams, coding personnel, authorization workflows and billing operations. Kinz HealthOps supports defined administrative workflows and payer follow-up within the agreed scope.",
+      "Cardiology practices may perform a range of evaluation, diagnostic and procedural services with differing payer and documentation requirements. Revenue-cycle support requires careful coordination between clinical teams, coding personnel, authorization workflows and billing operations. claryden rcm supports defined administrative workflows and payer follow-up within the agreed scope.",
     focusAreas: [
       {
         title: "Eligibility & Authorization",
@@ -226,7 +226,7 @@ export const specialties = [
     heroDescription:
       "Support orthopedic revenue workflows with coordinated authorization, claim and payer follow-up processes.",
     overview:
-      "Orthopedic practices may manage office visits, procedures and other services with distinct documentation, authorization and reimbursement considerations. Effective revenue-cycle operations require coordination across patient access, clinical documentation, coding and payer follow-up. Kinz HealthOps supports the administrative workflow while clinical and coding decisions remain with appropriately qualified professionals.",
+      "Orthopedic practices may manage office visits, procedures and other services with distinct documentation, authorization and reimbursement considerations. Effective revenue-cycle operations require coordination across patient access, clinical documentation, coding and payer follow-up. claryden rcm supports the administrative workflow while clinical and coding decisions remain with appropriately qualified professionals.",
     focusAreas: [
       {
         title: "Authorization Support",
@@ -266,7 +266,7 @@ export const specialties = [
     heroDescription:
       "Coordinate therapy revenue workflows from coverage verification through billing and outstanding claim resolution.",
     overview:
-      "Physical therapy billing can involve visit limits, authorization requirements, plan-specific benefits and documentation considerations. These requirements vary by payer and service. Kinz HealthOps supports administrative verification, billing and follow-up workflows while clinical documentation and medical-necessity decisions remain with qualified professionals.",
+      "Physical therapy billing can involve visit limits, authorization requirements, plan-specific benefits and documentation considerations. These requirements vary by payer and service. claryden rcm supports administrative verification, billing and follow-up workflows while clinical documentation and medical-necessity decisions remain with qualified professionals.",
     focusAreas: [
       {
         title: "Benefits & Visit Information",
@@ -306,7 +306,7 @@ export const specialties = [
     heroDescription:
       "Bring structure to complex pain management billing workflows and payer follow-through.",
     overview:
-      "Pain management practices may provide evaluation and procedural services with differing coverage, authorization and documentation requirements. Revenue-cycle operations require coordination with clinical and qualified coding teams, careful attention to payer requirements and consistent follow-up on unresolved claims. Kinz HealthOps supports these administrative workflows within the agreed service scope.",
+      "Pain management practices may provide evaluation and procedural services with differing coverage, authorization and documentation requirements. Revenue-cycle operations require coordination with clinical and qualified coding teams, careful attention to payer requirements and consistent follow-up on unresolved claims. claryden rcm supports these administrative workflows within the agreed service scope.",
     focusAreas: [
       {
         title: "Coverage & Authorization",

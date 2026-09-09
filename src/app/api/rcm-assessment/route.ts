@@ -475,13 +475,13 @@ export async function POST(request: Request) {
 
     const { data, error } = await resend.emails.send(
       {
-        from: `Kinz HealthOps <${config.from}>`,
+        from: `claryden rcm <${config.from}>`,
         to: [config.to],
 
         replyTo: assessment.workEmail,
 
         subject:
-          "New RCM Assessment | Kinz HealthOps",
+          "New RCM Assessment | claryden rcm",
 
         text: formatAssessment(
           assessment,

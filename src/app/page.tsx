@@ -9,10 +9,10 @@ import { SpecialtiesPreview } from "@/features/home/specialties-preview";
 import { siteConfig } from "@/config/site";
 
 const homeTitle =
-  "Medical Billing & Revenue Cycle Management | Kinz HealthOps";
+  "Medical Billing & Revenue Cycle Management | claryden rcm";
 
 const homeDescription =
-  "Kinz HealthOps provides medical billing and revenue cycle management solutions for healthcare practices. Explore our RCM services, revenue cycle approach, and specialty-focused support.";
+  "claryden rcm provides medical billing and revenue cycle management solutions for healthcare practices. Explore our RCM services, revenue cycle approach, and specialty-focused support.";
 
 export const metadata: Metadata = {
   title: {
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     description: homeDescription,
     images: [
       {
-        url: "/og/kinz-healthops-og.jpg",
+        url: "/og/claryden-rcm-og.jpg",
         width: 1200,
         height: 630,
         alt: `${siteConfig.name} — ${siteConfig.positioning}`,
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: homeTitle,
     description: homeDescription,
-    images: ["/og/kinz-healthops-og.jpg"],
+    images: ["/og/claryden-rcm-og.jpg"],
   },
 };
 

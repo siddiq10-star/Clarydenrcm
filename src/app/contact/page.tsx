@@ -20,9 +20,9 @@ import { ContactForm } from "@/features/contact/contact-form";
 
 const siteUrl = siteConfig.url.replace(/\/+$/, "");
 const contactUrl = `${siteUrl}/contact`;
-const pageTitle = "Contact Kinz HealthOps | Medical Billing & RCM";
+const pageTitle = "Contact claryden rcm | Medical Billing & RCM";
 const pageDescription =
-  "Contact Kinz HealthOps to discuss medical billing, revenue cycle management, denial management and A/R follow-up for your healthcare practice.";
+  "Contact claryden rcm to discuss medical billing, revenue cycle management, denial management and A/R follow-up for your healthcare practice.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     title: pageTitle,
     description: pageDescription,
     url: contactUrl,
-    siteName: "Kinz HealthOps",
+    siteName: "claryden rcm",
     type: "website",
     locale: "en_US",
   },
@@ -66,7 +66,7 @@ const contactPageSchema = {
   inLanguage: "en",
   mainEntity: {
     "@type": "Organization",
-    name: "Kinz HealthOps",
+    name: "claryden rcm",
     url: siteUrl,
     ...(contactEmail ? { email: contactEmail } : {}),
   },
@@ -143,7 +143,7 @@ function Hero() {
           className="size-4 shrink-0 text-[#087f78]"
           strokeWidth={1.8}
         />
-        Contact Kinz HealthOps
+        Contact claryden rcm
       </div>
 
       <h1

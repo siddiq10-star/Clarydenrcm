@@ -198,9 +198,9 @@ function Brand() {
 
       <div className="flex flex-col">
         <span className="text-[15px] font-extrabold leading-none tracking-[-0.035em] text-[#071722] sm:text-[16px]">
-          KINZ
+          CLARYDEN
           <span className="ml-1 font-medium text-[#48606c]">
-            HEALTHOPS
+            RCM
           </span>
         </span>
 
@@ -247,7 +247,7 @@ function DesktopNavigation({
             icon: Sparkles,
             label: "Explore all services",
             description:
-              "See the complete Kinz HealthOps revenue-cycle operating model.",
+              "See the complete claryden rcm revenue-cycle operating model.",
             href: siteConfig.routes.services,
           }}
         />

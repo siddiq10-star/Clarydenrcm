@@ -97,10 +97,10 @@ export function ContactForm({
     if (!contactEmail) return;
 
     const subject =
-      `Kinz HealthOps Inquiry — ${values.inquiryType}`;
+      `claryden rcm Inquiry — ${values.inquiryType}`;
 
     const body = [
-      "Kinz HealthOps — Business Inquiry",
+      "claryden rcm — Business Inquiry",
       "",
       `Name: ${values.name}`,
       `Work email: ${values.workEmail}`,
@@ -158,7 +158,7 @@ export function ContactForm({
           >
             Email contact is being configured. This
             form will become available once a working
-            Kinz HealthOps mailbox is connected.
+            claryden rcm mailbox is connected.
           </div>
         )}
 

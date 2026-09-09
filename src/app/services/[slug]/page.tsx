@@ -49,7 +49,7 @@ export async function generateMetadata({
     },
 
     openGraph: {
-      title: `${service.title} | Kinz HealthOps`,
+      title: `${service.title} | claryden rcm`,
 
       description:
         service.heroDescription,
@@ -62,7 +62,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
 
-      title: `${service.title} | Kinz HealthOps`,
+      title: `${service.title} | claryden rcm`,
 
       description:
         service.heroDescription,

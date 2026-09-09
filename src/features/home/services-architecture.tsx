@@ -277,7 +277,7 @@ function Header({ reduceMotion }: MotionProps) {
         className="min-w-0 max-w-[540px] lg:justify-self-end"
       >
         <p className="text-[15px] leading-7 text-[#526b76] sm:text-base sm:leading-8">
-          Kinz HealthOps connects medical billing and revenue cycle
+          claryden rcm connects medical billing and revenue cycle
           management (RCM) services—from front-end verification and billing
           to payer follow-up, payments and recovery—into one coordinated
           operating model.
@@ -303,7 +303,7 @@ function Header({ reduceMotion }: MotionProps) {
 function ServiceStack({ reduceMotion }: MotionProps) {
   return (
     <ul
-      aria-label="Kinz HealthOps services"
+      aria-label="claryden rcm services"
       className="grid min-w-0 list-none gap-3 sm:grid-cols-2"
     >
       {services.map((service, index) => (

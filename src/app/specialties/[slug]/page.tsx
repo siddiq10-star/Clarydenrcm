@@ -52,7 +52,7 @@ export async function generateMetadata({
     },
 
     openGraph: {
-      title: `${specialty.title} | Kinz HealthOps`,
+      title: `${specialty.title} | claryden rcm`,
       description: specialty.heroDescription,
       url,
       type: "website",
@@ -60,7 +60,7 @@ export async function generateMetadata({
 
     twitter: {
       card: "summary_large_image",
-      title: `${specialty.title} | Kinz HealthOps`,
+      title: `${specialty.title} | claryden rcm`,
       description: specialty.heroDescription,
     },
   };

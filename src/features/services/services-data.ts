@@ -31,7 +31,7 @@ export const services = [
     heroDescription:
       "Move claims through the revenue cycle with accurate workflows, clear ownership and disciplined follow-through.",
     overview:
-      "Medical billing is more than submitting claims. It requires coordination between patient information, clinical documentation, coding, payer requirements and payment workflows. Kinz HealthOps supports practices with structured billing operations designed to reduce avoidable rework and keep claims moving toward resolution.",
+      "Medical billing is more than submitting claims. It requires coordination between patient information, clinical documentation, coding, payer requirements and payment workflows. claryden rcm supports practices with structured billing operations designed to reduce avoidable rework and keep claims moving toward resolution.",
     highlights: [
       "Charge entry and claim preparation",
       "Claim validation and submission",
@@ -109,7 +109,7 @@ export const services = [
     heroDescription:
       "Bring ownership, prioritization and consistent follow-up to outstanding insurance receivables.",
     overview:
-      "A/R management requires more than repeatedly checking claim status. Each outstanding account needs an understood reason for non-payment, a documented next action and appropriate follow-up. Kinz HealthOps supports practices with organized A/R workflows that help teams focus on unresolved claims and reimbursement delays.",
+      "A/R management requires more than repeatedly checking claim status. Each outstanding account needs an understood reason for non-payment, a documented next action and appropriate follow-up. claryden rcm supports practices with organized A/R workflows that help teams focus on unresolved claims and reimbursement delays.",
     highlights: [
       "Insurance A/R aging review",
       "Payer claim-status follow-up",
@@ -187,7 +187,7 @@ export const services = [
     heroDescription:
       "Turn denied claims into organized resolution workflows with clear reasons, ownership and next actions.",
     overview:
-      "Denials can arise from eligibility, authorization, coding, documentation, payer rules and other issues. Effective denial management requires understanding the reason for the denial and selecting the appropriate response. Kinz HealthOps supports structured denial workflows that connect investigation, correction, appeal coordination and recurring-issue analysis.",
+      "Denials can arise from eligibility, authorization, coding, documentation, payer rules and other issues. Effective denial management requires understanding the reason for the denial and selecting the appropriate response. claryden rcm supports structured denial workflows that connect investigation, correction, appeal coordination and recurring-issue analysis.",
     highlights: [
       "Denial identification and categorization",
       "Root-cause investigation",
@@ -265,7 +265,7 @@ export const services = [
     heroDescription:
       "Keep payment records accurate, adjustments visible and unresolved balances ready for the next action.",
     overview:
-      "Payment posting connects payer adjudication with the practice's financial records. Accurate posting helps identify remaining patient responsibility, contractual adjustments, denials and unresolved balances. Kinz HealthOps supports payment workflows with attention to accuracy, reconciliation and timely identification of exceptions.",
+      "Payment posting connects payer adjudication with the practice's financial records. Accurate posting helps identify remaining patient responsibility, contractual adjustments, denials and unresolved balances. claryden rcm supports payment workflows with attention to accuracy, reconciliation and timely identification of exceptions.",
     highlights: [
       "ERA and EOB posting",
       "Insurance payment allocation",
@@ -343,7 +343,7 @@ export const services = [
     heroDescription:
       "Start the revenue cycle with clearer coverage information and fewer avoidable front-end surprises.",
     overview:
-      "Eligibility and benefits verification helps practices understand whether coverage is active and what information may affect reimbursement or patient responsibility. Kinz HealthOps supports approved verification workflows and communicates findings to the practice so appropriate action can be taken before the encounter.",
+      "Eligibility and benefits verification helps practices understand whether coverage is active and what information may affect reimbursement or patient responsibility. claryden rcm supports approved verification workflows and communicates findings to the practice so appropriate action can be taken before the encounter.",
     highlights: [
       "Coverage status verification",
       "Benefits and patient responsibility review",
@@ -421,7 +421,7 @@ export const services = [
     heroDescription:
       "Bring structure and visibility to authorization workflows before services reach the claim stage.",
     overview:
-      "Prior authorization requirements vary by payer, plan and service. Missing or incomplete authorization can create treatment delays and reimbursement issues. Kinz HealthOps supports the administrative authorization process using information supplied by the practice, while clinical decisions and medical-necessity determinations remain with appropriately qualified professionals.",
+      "Prior authorization requirements vary by payer, plan and service. Missing or incomplete authorization can create treatment delays and reimbursement issues. claryden rcm supports the administrative authorization process using information supplied by the practice, while clinical decisions and medical-necessity determinations remain with appropriately qualified professionals.",
     highlights: [
       "Authorization requirement checks",
       "Administrative submission support",
@@ -499,7 +499,7 @@ export const services = [
     heroDescription:
       "Organize provider enrollment, payer applications and credentialing follow-up with clear administrative workflows.",
     overview:
-      "Provider credentialing and payer enrollment involve collecting accurate provider information, coordinating applications and tracking payer requirements. Kinz HealthOps can support these administrative workflows based on the team's verified expertise and the agreed service scope. Credentialing, enrollment and contracting are distinct processes, and payer approval timelines are not guaranteed.",
+      "Provider credentialing and payer enrollment involve collecting accurate provider information, coordinating applications and tracking payer requirements. claryden rcm can support these administrative workflows based on the team's verified expertise and the agreed service scope. Credentialing, enrollment and contracting are distinct processes, and payer approval timelines are not guaranteed.",
     highlights: [
       "Provider information coordination",
       "Payer enrollment application support",
@@ -577,7 +577,7 @@ export const services = [
     heroDescription:
       "Connect documentation and coding workflows with accurate, compliant claim preparation.",
     overview:
-      "Medical coding translates clinical documentation into the codes used for billing and reimbursement. Coding requirements vary by specialty, service and payer. Kinz HealthOps can support coding workflows where appropriately qualified personnel and the required quality controls are available. Clinical documentation and medical decision-making remain the responsibility of the treating provider.",
+      "Medical coding translates clinical documentation into the codes used for billing and reimbursement. Coding requirements vary by specialty, service and payer. claryden rcm can support coding workflows where appropriately qualified personnel and the required quality controls are available. Clinical documentation and medical decision-making remain the responsibility of the treating provider.",
     highlights: [
       "Documentation-to-code workflow support",
       "Applicable code-set review",

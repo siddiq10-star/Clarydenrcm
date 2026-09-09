@@ -180,7 +180,7 @@ function Header({ reduceMotion }: { reduceMotion: boolean }) {
         <p className="text-[15px] leading-7 text-white/75 sm:text-base sm:leading-8">
           Medical billing and revenue cycle management involve connected
           steps, from eligibility through final payment. Each stage can
-          create delays, denials or lost revenue. Kinz HealthOps brings
+          create delays, denials or lost revenue. claryden rcm brings
           those stages into one disciplined operating model with clear
           accountability and continuous follow-up.
         </p>

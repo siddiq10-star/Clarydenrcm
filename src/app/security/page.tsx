@@ -22,10 +22,10 @@ import { Container } from "@/components/ui/container";
 import { siteConfig } from "@/config/site";
 
 const pageTitle =
-  "HIPAA, Security & Privacy for RCM Operations | Kinz HealthOps";
+  "HIPAA, Security & Privacy for RCM Operations | claryden rcm";
 
 const pageDescription =
-  "Review Kinz HealthOps' approach to HIPAA-related responsibilities, Business Associate Agreements (BAAs), privacy, security safeguards, minimum-necessary access, incident response and responsible revenue-cycle operations.";
+  "Review claryden rcm' approach to HIPAA-related responsibilities, Business Associate Agreements (BAAs), privacy, security safeguards, minimum-necessary access, incident response and responsible revenue-cycle operations.";
 
 const pageUrl = new URL("/security", siteConfig.url).toString();
 
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     title: pageTitle,
     description: pageDescription,
     url: pageUrl,
-    siteName: "Kinz HealthOps",
+    siteName: "claryden rcm",
     locale: "en_US",
     type: "website",
   },
@@ -157,7 +157,7 @@ const hipaaResponsibilities = [
     icon: FileText,
     title: "Business Associate Agreement",
     description:
-      "When Kinz HealthOps acts as a Business Associate and PHI will be involved, the parties should execute the required BAA before PHI is created, received, maintained or transmitted for the engagement.",
+      "When claryden rcm acts as a Business Associate and PHI will be involved, the parties should execute the required BAA before PHI is created, received, maintained or transmitted for the engagement.",
     detail: "BAA before PHI access",
   },
   {
@@ -197,7 +197,7 @@ const hipaaResponsibilities = [
     icon: MessageSquareText,
     title: "Individual-rights support",
     description:
-      "Where the engagement requires it, the BAA should define how Kinz HealthOps supports the covered entity with access, amendment and accounting-of-disclosures obligations for PHI maintained on the covered entity's behalf.",
+      "Where the engagement requires it, the BAA should define how claryden rcm supports the covered entity with access, amendment and accounting-of-disclosures obligations for PHI maintained on the covered entity's behalf.",
     detail: "Access • Amendment • Accounting",
   },
 ] as const;
@@ -727,7 +727,7 @@ function SharedResponsibilities() {
           <ResponsibilityCard
             icon={FileText}
             title="Business Associate responsibilities"
-            description="When providing services involving protected health information on behalf of a US covered entity, Kinz HealthOps would generally operate as a Business Associate. Applicable obligations, permitted uses and responsibilities must be addressed through the required agreements and safeguards."
+            description="When providing services involving protected health information on behalf of a US covered entity, claryden rcm would generally operate as a Business Associate. Applicable obligations, permitted uses and responsibilities must be addressed through the required agreements and safeguards."
           />
 
           <ResponsibilityCard
@@ -802,7 +802,7 @@ function ComplianceBoundary() {
               </h2>
 
               <p className="mt-4 text-[13px] leading-7 text-[#607780]">
-                Kinz HealthOps should describe itself as “HIPAA compliant” or
+                claryden rcm should describe itself as “HIPAA compliant” or
                 make equivalent categorical claims only after the applicable
                 requirements, policies, risk analysis, workforce training,
                 vendor arrangements and safeguards have actually been
@@ -858,7 +858,7 @@ function ContactCTA() {
             href={siteConfig.routes.contact}
             className="group mt-7 inline-flex min-h-[54px] items-center justify-center gap-2.5 rounded-[15px] bg-[#071c27] px-6 text-[13px] font-semibold !text-white shadow-[0_16px_42px_rgba(5,28,38,0.18)] transition-all duration-300 hover:-translate-y-0.5"
           >
-            Contact Kinz HealthOps
+            Contact claryden rcm
             <ArrowRight
               className="size-4 transition-transform duration-300 group-hover:translate-x-1"
               strokeWidth={1.8}

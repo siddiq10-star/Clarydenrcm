@@ -23,10 +23,10 @@ import {
 } from "@/features/services/services-data";
 
 const pageTitle =
-  "Revenue Cycle Management Services | Kinz HealthOps";
+  "Revenue Cycle Management Services | claryden rcm";
 
 const pageDescription =
-  "Explore Kinz HealthOps revenue cycle management services, including medical billing, A/R management, denial management, payment posting, eligibility verification, prior authorization, credentialing and medical coding support.";
+  "Explore claryden rcm revenue cycle management services, including medical billing, A/R management, denial management, payment posting, eligibility verification, prior authorization, credentialing and medical coding support.";
 
 const pageUrl = new URL("/services", siteConfig.url).toString();
 
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     title: pageTitle,
     description: pageDescription,
     url: pageUrl,
-    siteName: "Kinz HealthOps",
+    siteName: "claryden rcm",
     locale: "en_US",
     type: "website",
   },
@@ -183,7 +183,7 @@ function Hero() {
       </h1>
 
       <p className="mx-auto mt-7 max-w-[760px] text-[15px] leading-8 text-[#657a84] sm:text-[17px]">
-        Kinz HealthOps supports healthcare practices
+        claryden rcm supports healthcare practices
         across front-end workflows, claim operations,
         payer follow-up, payment posting and revenue
         recovery through a coordinated RCM operating
@@ -534,7 +534,7 @@ function AssessmentCTA() {
             href={siteConfig.routes.contact}
             className="inline-flex min-h-[54px] items-center justify-center gap-2 rounded-[15px] border border-black/[0.075] bg-white/75 px-6 text-[13px] font-semibold text-[#23414c] transition-colors hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b958a]/35 focus-visible:ring-offset-2"
           >
-            Contact Kinz HealthOps
+            Contact claryden rcm
           </Link>
         </div>
 

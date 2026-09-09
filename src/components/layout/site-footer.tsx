@@ -94,9 +94,9 @@ function BrandColumn() {
 
         <div>
           <div className="text-[17px] font-extrabold tracking-[-0.04em]">
-            KINZ
+            CLARYDEN
             <span className="ml-1 font-medium text-white/55">
-              HEALTHOPS
+              RCM
             </span>
           </div>
 
@@ -114,7 +114,7 @@ function BrandColumn() {
       </h2>
 
       <p className="mt-5 max-w-[500px] text-[14px] leading-7 text-white/45">
-        Kinz HealthOps supports healthcare practices across billing,
+        claryden rcm supports healthcare practices across billing,
         denials, A/R, payment workflows and revenue-cycle operations.
       </p>
 
@@ -146,7 +146,7 @@ function BrandColumn() {
             href={siteConfig.social.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Kinz HealthOps on LinkedIn"
+            aria-label="claryden rcm on LinkedIn"
             className="
               inline-flex size-11 items-center justify-center
               rounded-xl border border-white/[0.08]
